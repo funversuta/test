@@ -1,0 +1,18 @@
+import React, { useState, useEffect } from 'react'
+import styled from 'styled-components'
+
+const ${componentConstName} = styled.div${'`' + '\n    position: relative;\n' + '`'}
+
+interface ${componentConstName}Props {
+    className?: string
+}
+
+const Index = ({ className }: ${componentConstName}Props) => {
+    return (
+        <${componentConstName} className={className}>
+            {/* Component body */}
+        </${componentConstName}>
+    )
+}
+
+export default Index
