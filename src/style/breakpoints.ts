@@ -9,4 +9,6 @@ const breakpoints = {
     uhd: '3840px'
 }
 
+export type Breakpoints = keyof typeof breakpoints
+
 export default breakpoints

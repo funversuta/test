@@ -10,4 +10,6 @@ const variables = {
     }
 }
 
+export type Offset = keyof typeof variables.offset
+
 export default variables
