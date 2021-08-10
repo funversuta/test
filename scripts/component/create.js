@@ -16,8 +16,6 @@ const componentJsonPath = './scripts/components.json';
 const componentTplPath = './scripts/component/template.tsxtpl';
 const componentStyledTplPath = './scripts/component/styled.tsxtpl';
 
-console.log(colors.green(`Test ${fs.readFileSync(componentStyledTplPath).toString()}`))
-
 const componentName = process.argv[2];
 const componentConstName = componentName.kebabToCamel().capitalize();
 
