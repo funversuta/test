@@ -1,18 +1,16 @@
-import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
-
-const ${componentConstName} = styled.div${'`' + '\n    position: relative;\n' + '`'}
+import React from 'react';
+import { Container } from './${componentConstName}.styled';
 
 interface ${componentConstName}Props {
-    className?: string
+    /* Component props */
 }
 
-const Index = ({ className }: ${componentConstName}Props) => {
+const ${componentConstName}: React.FC<${componentConstName}Props> = () => {
     return (
-        <${componentConstName} className={className}>
+        <Container>
             {/* Component body */}
-        </${componentConstName}>
+        </Container>
     )
 }
 
-export default Index
+export default ${componentConstName};
