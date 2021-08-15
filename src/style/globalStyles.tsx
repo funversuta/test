@@ -1,6 +1,6 @@
 import {createGlobalStyle} from "styled-components";
 import variables from "./variables";
-import {color, mediaBreakpointUp} from "./mixins";
+import {color} from "./mixins";
 
 const GlobalStyle = createGlobalStyle`
     * {
@@ -25,10 +25,6 @@ const GlobalStyle = createGlobalStyle`
         overscroll-behavior: none;
         overflow: auto;
         background-color: ${color(1)};
-
-        ${mediaBreakpointUp('md')} {
-            overflow: hidden;
-        }
     }
 
     h1, h2, h3, h4, h5, span, a {

@@ -1,45 +1,46 @@
-import {useRef, useLayoutEffect, MutableRefObject, DependencyList} from 'react'
+import {useRef, MutableRefObject, DependencyList, useEffect} from 'react'
 import ScrollBar from "smooth-scrollbar";
 
-const isBrowser = typeof window !== `undefined`
-
-const getScrollPosition = ({element, scrollRoot}: { element?: MutableRefObject<HTMLElement>, scrollRoot: Window | ScrollBar }) => {
-    if (!isBrowser) return {x: 0, y: 0}
-
-    const target = element ? element.current : document.body
-    const position = target.getBoundingClientRect()
+const getScrollPosition = ({scrollRoot}: { element?: MutableRefObject<HTMLElement>, scrollRoot: Window | ScrollBar | null }) => {
+    if (!scrollRoot) return {x: 0, y: 0}
 
     return scrollRoot === window
         ? {x: window.scrollX, y: window.scrollY}
-        : {x: position.left, y: position.top}
+        : {x: (<ScrollBar>scrollRoot).offset.x, y: (<ScrollBar>scrollRoot).offset.y}
 }
 
 declare const UNDEFINED_VOID_ONLY: unique symbol;
-type Effect = ({prevPos, currPos}: { prevPos: {x: number, y: number}, currPos: {x: number, y: number}}) => (void | (() => void) | { [UNDEFINED_VOID_ONLY]: never })
-type UseScrollPositionProps = (effect: Effect, deps: DependencyList, element: MutableRefObject<HTMLElement>, scrollRoot: Window | ScrollBar, delay?: number) => void
+type Effect = ({position, prevPosition}: { position: {x: number, y: number}, prevPosition: {x: number, y: number}}) => (void | (() => void) | { [UNDEFINED_VOID_ONLY]: never })
+type UseScrollPositionProps = (effect: Effect, scrollRoot: Window | ScrollBar | null, deps: DependencyList, element: MutableRefObject<HTMLElement>, delay?: number) => void
 
 /**
- *  @description Набросок хука для определении позиции скрола.
- *  Пока написан только под нативный скролл
+ *  @description Добавление события на скролл (плавный или нативный). Хук надо протестить
+ *  @param effect - Функция, которая будет срабатывать на событие скролла
+ *  @param scrollRoot - Нативный или кастомный скролл внутри которого будет определяться позиция ()
+ *  @param deps - Массив зависимостей для обновления события (Всегда зависит от изменения scrollRoot)
+ *  @param element - Ref элемента относительно которого может идти расчёт позиции. (Возможно, не потребуется)
+ *  @param delay - Задержка перед вызовом события скролла. (Возможно, не потребуется)
  *
- *  Не протестирован
- *
- *  @link https://dev.to/n8tb1t/tracking-scroll-position-with-react-hooks-3bbj
+ *  @example
+ *  useScrollPosition(({position, prevPosition}) => {
+ *      // Action on scroll
+ *  }, scrollbar)
  */
-
-const useScrollPosition: UseScrollPositionProps = (effect, deps = [], element, scrollRoot = window, delay = 0) => {
-    const position = useRef(getScrollPosition({scrollRoot}))
+const useScrollPosition: UseScrollPositionProps = (effect, scrollRoot = window, deps = [], element, delay = 0) => {
+    const prevPosition = useRef(getScrollPosition({scrollRoot}))
 
     let throttleTimeout: NodeJS.Timeout | null = null
 
     const callBack = () => {
-        const currPos = getScrollPosition({element, scrollRoot})
-        effect({prevPos: position.current, currPos})
-        position.current = currPos
+        const position = getScrollPosition({element, scrollRoot})
+        effect({position, prevPosition: prevPosition.current})
+        prevPosition.current = position
         throttleTimeout = null
     }
 
-    useLayoutEffect(() => {
+    useEffect(() => {
+        if (!scrollRoot) return;
+
         const handleScroll = () => {
             if (!!delay) {
                 if (throttleTimeout === null) {
@@ -50,20 +51,22 @@ const useScrollPosition: UseScrollPositionProps = (effect, deps = [], element, s
             }
         }
 
+
         if (scrollRoot === window) {
-            scrollRoot.addEventListener('scroll', handleScroll)
+            scrollRoot!.addEventListener('scroll', handleScroll)
         } else {
-            (scrollRoot as ScrollBar).addListener(handleScroll)
+
+            (<ScrollBar>scrollRoot).addListener(handleScroll);
         }
 
         return () => {
             if (scrollRoot === window) {
-                scrollRoot.removeEventListener('scroll', handleScroll)
+                scrollRoot!.removeEventListener('scroll', handleScroll)
             } else {
-                (scrollRoot as ScrollBar).removeListener(handleScroll)
+                (<ScrollBar>scrollRoot).removeListener(handleScroll)
             }
         }
-    }, deps)
+    }, [scrollRoot, ...deps])
 }
 
 export default useScrollPosition;

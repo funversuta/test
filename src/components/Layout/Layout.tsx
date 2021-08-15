@@ -5,7 +5,7 @@ import Head from "next/head";
 import {Container} from "./Layout.styled";
 
 interface LayoutProps {
-    children: React.ReactNode,
+    /* Layout props */
 }
 
 const Layout: React.FC<LayoutProps> = ({children}) => {
