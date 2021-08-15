@@ -6,7 +6,7 @@ const variables = {
     },
     videoRatio: 9 / 16 * 100,
     fonts: {
-        mont: 'Mont'
+        default: 'Arial'
     }
 }
 

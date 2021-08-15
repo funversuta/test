@@ -2,7 +2,7 @@ import React from 'react';
 import {Container} from "./Preloader.styled";
 
 interface PreloaderProps {
-    // Props
+    /* Component props */
 }
 
 const Preloader: React.FC<PreloaderProps> = () => {

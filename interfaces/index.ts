@@ -1,2 +1,4 @@
-export interface Base {}
+export interface Base {
+
+}
 

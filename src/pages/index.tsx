@@ -14,10 +14,12 @@ const Index: React.FC<IndexProps> = () => {
     )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps<IndexProps> = async () => {
 
     return {
-        props: {},
+        props: {
+            /* Page props */
+        },
         revalidate: 1
     }
 }

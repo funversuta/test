@@ -1,5 +1,6 @@
 import breakpoints, {Breakpoints} from './breakpoints'
 import variables, {Offset} from "./variables";
+import colors, {Colors} from "./colors";
 
 export const mediaBreakpointUp: (breakpoint: Breakpoints) => string = (breakpoint) => {
     return `@media(min-width: ${breakpoints[breakpoint]})`;
@@ -17,24 +18,14 @@ export const vh: (value: number, screenHeight?: number) => string = (value, scre
     return `${(value / screenHeight) * 100}vh`;
 };
 
+export const color: (value: Colors) => string = (value) => {
+    return (<any>colors)[typeof value === 'number' ? `color${value}`: value];
+};
+
 export const cols: (value: number) => string = (value) => {
     return `${variables.col * value}vw`;
 };
 
 export const offset: (type: Offset) => string = (type) => {
-    return `${variables.offset[type]}px`;
-}
-
-export const getAdaptiveFont = (mobileSize: number, tabletSize: number, desktopSize: number) => {
-    return `
-        font-size: ${ mobileSize }px;
-
-        @media (min-width: ${ breakpoints.md }) {
-            font-size: ${ tabletSize }px;
-        }
-
-        @media (min-width: ${ breakpoints.xxl }) {
-            font-size: ${ desktopSize }px;
-        }
-    `
+    return vw(variables.offset[type], type === "mobile" ? 375 : 768);
 }

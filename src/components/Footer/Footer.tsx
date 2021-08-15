@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from "./Footer.styled";
 
 interface FooterProps {
-    //Props
+    /* Component props */
 }
 
 const Footer: React.FC<FooterProps> = () => {
