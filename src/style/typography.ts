@@ -33,4 +33,6 @@ const typography = {
     `,
 }
 
+export type Typography = keyof typeof typography
+
 export default typography

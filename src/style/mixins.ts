@@ -1,6 +1,8 @@
 import breakpoints, {Breakpoints} from './breakpoints'
 import variables, {Offset} from "./variables";
 import colors, {Colors} from "./colors";
+import typography, {Typography} from "./typography";
+import {FlattenSimpleInterpolation} from "styled-components";
 
 /**
  * @param breakpoint - целевой Breakpoint
@@ -66,4 +68,12 @@ export const cols: (value: number) => string = (value) => {
  */
 export const offset: (type: Offset) => string = (type) => {
     return vw(variables.offset[type], type === "mobile" ? 375 : 768);
+}
+
+/**
+ * @param name - Название типа текста
+ * @returns Стандартные стили для указаннгого типа текста
+ */
+export const font: (name: Typography) => FlattenSimpleInterpolation = (name) => {
+    return typography[name];
 }
