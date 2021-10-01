@@ -1,69 +1,79 @@
-import {useRef, MutableRefObject, DependencyList, useEffect} from 'react'
+import {useRef, DependencyList, useEffect, useState} from 'react'
 import ScrollBar from "smooth-scrollbar";
 
-const getScrollPosition = ({scrollRoot}: { element?: MutableRefObject<HTMLElement>, scrollRoot: Window | ScrollBar | null }) => {
-    if (!scrollRoot) return {x: 0, y: 0}
-
-    return scrollRoot === window
-        ? {x: window.scrollX, y: window.scrollY}
-        : {x: (<ScrollBar>scrollRoot).offset.x, y: (<ScrollBar>scrollRoot).offset.y}
-}
+type Direction = 'up' | 'down';
+type Data2D = {x: number, y: number}
+type ScrollRoot = Window | HTMLElement | ScrollBar | null
 
 declare const UNDEFINED_VOID_ONLY: unique symbol;
-type Effect = ({position, prevPosition}: { position: {x: number, y: number}, prevPosition: {x: number, y: number}}) => (void | (() => void) | { [UNDEFINED_VOID_ONLY]: never })
-type UseScrollPositionProps = (effect: Effect, scrollRoot: Window | ScrollBar | null, deps: DependencyList, element: MutableRefObject<HTMLElement>, delay?: number) => void
+type Effect = ({position, direction}: { position: Data2D, direction: Direction}) => (void | (() => void) | { [UNDEFINED_VOID_ONLY]: never })
+type UseScrollPositionProps = (effect: Effect, deps?: DependencyList, root?: ScrollRoot) => void
+
+const getScrollPosition = (scrollRoot: ScrollRoot): Data2D => {
+    if (!scrollRoot) return {x: 0, y: 0}
+
+    if ('scrollY' in scrollRoot) {
+        return {x: scrollRoot.scrollX, y: scrollRoot.scrollY}
+    }
+
+    if ('scrollTop' in scrollRoot) {
+        return {x: scrollRoot.scrollLeft, y: scrollRoot.scrollTop}
+    }
+
+    return {
+        x: (<ScrollBar>scrollRoot).offset.x,
+        y: (<ScrollBar>scrollRoot).offset.y
+    }
+}
+
+const getDirection = (position: Data2D, prevPosition: Data2D): Direction => {
+    return position.y - prevPosition.y > 0 ? 'down' : 'up'
+}
 
 /**
- *  @description Добавление события на скролл (плавный или нативный). Хук надо протестить
+ *  @description Добавление события на скролл
  *  @param effect - Функция, которая будет срабатывать на событие скролла
- *  @param scrollRoot - Нативный или кастомный скролл внутри которого будет определяться позиция ()
  *  @param deps - Массив зависимостей для обновления события (Всегда зависит от изменения scrollRoot)
- *  @param element - Ref элемента относительно которого может идти расчёт позиции. (Возможно, не потребуется)
- *  @param delay - Задержка перед вызовом события скролла. (Возможно, не потребуется)
+ *  @param root - Контейнер внутри которого будет определяться позиция. По умолчанию - window
  *
  *  @example
- *  useScrollPosition(({position, prevPosition}) => {
+ *  useScrollPosition(({position, direction}) => {
  *      // Action on scroll
- *  }, scrollbar)
+ *  })
  */
-const useScrollPosition: UseScrollPositionProps = (effect, scrollRoot = window, deps = [], element, delay = 0) => {
-    const prevPosition = useRef(getScrollPosition({scrollRoot}))
-
-    let throttleTimeout: NodeJS.Timeout | null = null
+const useScrollPosition: UseScrollPositionProps = (effect, deps = [], root = null) => {
+    const [scrollRoot, setScrollRoot] = useState<ScrollRoot>(root);
+    const prevPosition = useRef(getScrollPosition(scrollRoot))
 
     const callBack = () => {
-        const position = getScrollPosition({element, scrollRoot})
-        effect({position, prevPosition: prevPosition.current})
+        const position = getScrollPosition(scrollRoot);
+        const direction = getDirection(position, prevPosition.current)
+        effect({position, direction})
         prevPosition.current = position
-        throttleTimeout = null
     }
+
+    useEffect(() => {
+        setScrollRoot(scrollRoot || window);
+    }, [])
 
     useEffect(() => {
         if (!scrollRoot) return;
 
         const handleScroll = () => {
-            if (!!delay) {
-                if (throttleTimeout === null) {
-                    throttleTimeout = setTimeout(callBack, delay)
-                }
-            } else {
-                callBack()
-            }
+            callBack()
         }
 
-
-        if (scrollRoot === window) {
-            scrollRoot!.addEventListener('scroll', handleScroll)
+        if ('addListener' in scrollRoot) {
+            scrollRoot.addListener(handleScroll);
         } else {
-
-            (<ScrollBar>scrollRoot).addListener(handleScroll);
+            scrollRoot.addEventListener('scroll', handleScroll)
         }
 
         return () => {
-            if (scrollRoot === window) {
-                scrollRoot!.removeEventListener('scroll', handleScroll)
+            if ('removeListener' in scrollRoot) {
+                scrollRoot.removeListener(handleScroll)
             } else {
-                (<ScrollBar>scrollRoot).removeListener(handleScroll)
+                scrollRoot.removeEventListener('scroll', handleScroll)
             }
         }
     }, [scrollRoot, ...deps])
