@@ -22,8 +22,9 @@ const ScrollBarProvider: React.FC = ({ children }) => {
         }
 
         return () => {
-            if (scrollBar === window || scrollBar === null) return;
-            (scrollBar as ScrollBar).destroy();
+            if (scrollBar && 'destroy' in scrollBar) {
+                scrollBar.destroy();
+            }
         };
     }, []);
 
