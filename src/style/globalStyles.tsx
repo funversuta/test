@@ -24,7 +24,6 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         overscroll-behavior: none;
         overflow: auto;
-        background-color: ${color(1)};
     }
 
     h1, h2, h3, h4, h5, span, a {

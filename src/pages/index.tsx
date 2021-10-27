@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next'
 import React from "react"
-import Layout from '../components/Layout/Layout'
+import {Layout} from "@/components";
 
 interface IndexProps {
     /* Page props*/

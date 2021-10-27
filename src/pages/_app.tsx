@@ -1,9 +1,10 @@
 import { AppProps } from 'next/app'
 import { SwitchTransition, Transition } from 'react-transition-group';
-import GlobalStyle from "../style/globalStyles";
-import '../style/fonts.css';
-import ScrollBarProvider from "../context/ScrollBarContext";
+import GlobalStyle from "@/style/globalStyles";
+import '@/style/fonts.css';
+import ScrollBarProvider from "@/context/ScrollBarContext";
 import {RecoilRoot} from "recoil";
+import 'swiper/css';
 
 const MyApp = ({ Component, pageProps, router }: AppProps) => {
     const { asPath } = router;

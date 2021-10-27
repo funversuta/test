@@ -1,6 +1,6 @@
 import React, {createContext, useState, useContext, useEffect} from 'react';
 import ScrollBar from 'smooth-scrollbar';
-import {isTouchDevice} from "../helpers";
+import {isTouchDevice} from "@/helpers";
 
 type ScrollBarContextType = ScrollBar | Window | null
 
