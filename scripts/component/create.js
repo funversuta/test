@@ -11,9 +11,10 @@ String.prototype.kebabToCamel = function() {
 };
 
 // Пути до файлов/папок
-const componentFolderPath = './src/layout';
+const componentFolderPath = './src/components';
 const componentJsonPath = './scripts/components.json';
 const componentTplPath = './scripts/component/template.tsxtpl';
+const componentStyledTplPath = './scripts/component/styled.tsxtpl';
 
 const componentName = process.argv[2];
 const componentConstName = componentName.kebabToCamel().capitalize();
@@ -47,8 +48,11 @@ fs.writeFileSync(componentJsonPath, JSON.stringify(componentsList, null, 2));
 // Создание папки
 fs.mkdirSync(`${componentFolderPath}/${componentConstName}`);
 
-// Создание файла
+// Создание файлов
 const componentTemplate = fs.readFileSync(componentTplPath).toString();
-fs.writeFileSync(`${componentFolderPath}/${componentConstName}/index.tsx`, eval('`' + componentTemplate + '`'));
+const componentStyledTemplate = fs.readFileSync(componentStyledTplPath).toString();
+
+fs.writeFileSync(`${componentFolderPath}/${componentConstName}/${componentConstName}.styled.tsx`, eval('`' + componentStyledTemplate + '`'));
+fs.writeFileSync(`${componentFolderPath}/${componentConstName}/${componentConstName}.tsx`, eval('`' + componentTemplate + '`'));
 
 console.log(colors.blue(`Компонент ${colors.bold(componentName)} создан`));

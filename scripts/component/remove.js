@@ -12,7 +12,7 @@ String.prototype.kebabToCamel = function() {
 };
 
 // Пути до файлов/папок
-const componentFolderPath = './src/layout';
+const componentFolderPath = './src/components';
 const componentJsonPath = './scripts/components.json';
 
 const componentName = process.argv[2];

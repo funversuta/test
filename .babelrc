@@ -1,7 +1,19 @@
 {
     "presets": ["next/babel"],
     "plugins": [
-        "inline-react-svg",
-        ["styled-components", { "ssr": true }]
+        [
+            "inline-react-svg",
+            {
+                "svgo": {
+                    "plugins": [
+                        {
+                            "name": "cleanupIDs",
+                            "active": false
+                        }
+                    ]
+                }
+            }
+        ],
+        ["babel-plugin-styled-components", { "ssr": true }]
     ]
   }

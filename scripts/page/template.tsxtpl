@@ -1,32 +1,27 @@
 import { GetStaticProps } from 'next'
-import Layout from '../layout/Layout'
-import { Base } from '../../interfaces'
-import { getMenu } from '../../lib/api'
+import React from "react"
+import Layout from '../components/Layout/Layout'
 
-interface ${pageConstName}Props extends Base {
-    
+interface ${pageConstName}Props {
+    /* Page props */
 }
 
-const Index = ({ menu }: ${pageConstName}Props) => {
+const ${pageConstName}: React.FC<${pageConstName}Props> = () => {
     return (
-        <Layout
-            title="${pageTitle}"
-            menu={menu}
-        >
+        <Layout>
             {/* Page body */}
         </Layout>
     )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-    const menu = await getMenu();
+export const getStaticProps: GetStaticProps<${pageConstName}props> = async () => {
 
     return {
         props: {
-            menu
+            /* Page props */
         },
-        // revalidate: 1
+        revalidate: 1
     }
 }
 
-export default Index
+export default ${pageConstName};
