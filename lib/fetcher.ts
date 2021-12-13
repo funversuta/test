@@ -1,6 +1,9 @@
 import axios, { AxiosResponse} from 'axios';
 
 const fetcherPure = (apiUrl: string) => {
+    if (apiUrl === '') {
+        console.error('fetcher.ts: Check your .env.local')
+    }
     const axiosInstance = axios.create({baseURL: apiUrl});
 
     return async (url: string) => {
