@@ -43,6 +43,6 @@ module.exports = {
     // Эксперементальные настройки
     experimental: {
         // Поддержка swc styledComponent
-        styledComponent: true
+        styledComponents: true
     }
 };

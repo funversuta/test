@@ -5,23 +5,27 @@ import '@/style/fonts.css';
 import ScrollBarProvider from "@/context/ScrollBarContext";
 import {RecoilRoot} from "recoil";
 import 'swiper/css';
+import {SWRConfig} from "swr";
+import fetcher from "@/lib/fetcher";
 
 const MyApp = ({ Component, pageProps, router }: AppProps) => {
     const { asPath } = router;
 
     return (
         <RecoilRoot>
-            <ScrollBarProvider>
-                <GlobalStyle />
-                <SwitchTransition>
-                    <Transition
-                        key={asPath}
-                        timeout={600}
-                    >
-                        <Component {...pageProps} />
-                    </Transition>
-                </SwitchTransition>
-            </ScrollBarProvider>
+            <SWRConfig value={{ fetcher }}>
+                <ScrollBarProvider>
+                    <GlobalStyle />
+                    <SwitchTransition>
+                        <Transition
+                            key={asPath}
+                            timeout={600}
+                        >
+                            <Component {...pageProps} />
+                        </Transition>
+                    </SwitchTransition>
+                </ScrollBarProvider>
+            </SWRConfig>
         </RecoilRoot>
     )
 }
