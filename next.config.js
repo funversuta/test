@@ -22,17 +22,27 @@ module.exports = {
         domains: [mainImageDomain || '']
     },
 
+    // Для пакета @svgr/webpack
     webpack(config) {
         config.module.rules.push({
-            test: /\.svg$/,
-            use: ['@svgr/webpack']
+            test: /\.svg$/i,
+            issuer: { and: [/\.(js|ts|md)x?$/] },
+            use: ['@svgr/webpack'],
         });
-
         return config;
     },
 
     // Переменные env, которые необходимо передавать на клиент
     env: {
         API_URL: process.env.API_URL
+    },
+
+    // Компилятор для минификации
+    swcMinify: true,
+
+    // Эксперементальные настройки
+    experimental: {
+        // Поддержка swc styledComponent
+        styledComponent: true
     }
 };
