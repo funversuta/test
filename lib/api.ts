@@ -1,6 +1,6 @@
-import indexPage from '../data/index.json'
+import indexPage from '../data/index.json';
 
 /** @description - Адрес /api для запросов на бэк */
 // const apiUrl = `${process.env.API_URL}/api`
 
-export const getIndexPage = () => indexPage
+export const getIndexPage = () => indexPage;
