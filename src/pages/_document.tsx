@@ -1,19 +1,19 @@
-import Document, {Html, Head, Main, NextScript, DocumentContext} from 'next/document';
+// eslint-disable-next-line @next/next/no-document-import-in-page
+import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
 class MyDocument extends Document {
     static async getInitialProps(ctx: DocumentContext) {
-        const sheet = new ServerStyleSheet()
-        const originalRenderPage = ctx.renderPage
+        const sheet = new ServerStyleSheet();
+        const originalRenderPage = ctx.renderPage;
 
         try {
             ctx.renderPage = () =>
                 originalRenderPage({
-                    enhanceApp: (App) => (props) =>
-                        sheet.collectStyles(<App {...props} />)
-                })
+                    enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />)
+                });
 
-            const initialProps = await Document.getInitialProps(ctx)
+            const initialProps = await Document.getInitialProps(ctx);
             return {
                 ...initialProps,
                 styles: (
@@ -22,9 +22,9 @@ class MyDocument extends Document {
                         {sheet.getStyleElement()}
                     </>
                 )
-            }
+            };
         } finally {
-            sheet.seal()
+            sheet.seal();
         }
     }
 
@@ -37,7 +37,7 @@ class MyDocument extends Document {
                     <NextScript />
                 </body>
             </Html>
-        )
+        );
     }
 }
 

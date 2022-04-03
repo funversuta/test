@@ -1,6 +1,6 @@
-import {createGlobalStyle} from "styled-components";
-import variables from "./variables";
-import {color} from "./mixins";
+import { createGlobalStyle } from 'styled-components';
+import variables from './variables';
+import { color } from './mixins';
 
 const GlobalStyle = createGlobalStyle`
     * {
@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
         font-family: ${variables.fonts.default};
         -ms-overflow-style: none;
         scrollbar-width: none;
-        color: ${color("black")};
+        color: ${color('black')};
     }
 
     body {
@@ -49,6 +49,6 @@ const GlobalStyle = createGlobalStyle`
             outline: none;
         }
     }
-`
+`;
 
 export default GlobalStyle;

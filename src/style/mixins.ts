@@ -1,9 +1,9 @@
-import breakpoints, {Breakpoints} from './breakpoints'
-import variables, {Offset} from "./variables";
-import colors, {Colors} from "./colors";
-import typography, {Typography} from "./typography";
-import {FlattenSimpleInterpolation} from "styled-components";
-import {rgba} from "polished";
+import breakpoints, { Breakpoints } from './breakpoints';
+import variables, { Offset } from './variables';
+import colors, { Colors } from './colors';
+import typography, { Typography } from './typography';
+import { FlattenSimpleInterpolation } from 'styled-components';
+import { rgba } from 'polished';
 
 /**
  * @param breakpoint - целевой Breakpoint
@@ -41,7 +41,7 @@ export const mediaBreakpointDown: (breakpoint: Breakpoints) => string = (breakpo
  * }
  */
 export const vw: (value: number, screenWidth?: Breakpoints | number) => string = (value, screenWidth: Breakpoints | number = 1920) => {
-    const widthInPx = typeof screenWidth === 'number' ? screenWidth : parseInt(breakpoints[screenWidth])
+    const widthInPx = typeof screenWidth === 'number' ? screenWidth : parseInt(breakpoints[screenWidth]);
     return `${(value / widthInPx) * 100}vw`;
 };
 
@@ -71,7 +71,7 @@ export const vh: (value: number, screenHeight?: number) => string = (value, scre
  * background: ${color(1, 0.3)};
  */
 export const color: (value: Colors, opacity?: number) => string = (value, opacity = 1) => {
-    return rgba((<any>colors)[typeof value === 'number' ? `color${value}`: value], opacity);
+    return rgba((<any>colors)[typeof value === 'number' ? `color${value}` : value], opacity);
 };
 
 /**
@@ -102,10 +102,10 @@ export const offset: (type: Offset) => string = (type) => {
     const size = {
         mobile: 375,
         tablet: 768,
-        desktop: 1920,
-    }
+        desktop: 1920
+    };
     return vw(variables.offset[type], size[type]);
-}
+};
 
 /**
  * @param name - Название типа текста
@@ -115,4 +115,4 @@ export const offset: (type: Offset) => string = (type) => {
  */
 export const font: (name: Typography) => FlattenSimpleInterpolation = (name) => {
     return typography[name];
-}
+};

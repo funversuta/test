@@ -4,12 +4,12 @@ const variables = {
         mobile: 30,
         tablet: 40
     },
-    videoRatio: 9 / 16 * 100,
+    videoRatio: (9 / 16) * 100,
     fonts: {
         default: 'Arial'
     }
-}
+};
 
-export type Offset = keyof typeof variables.offset
+export type Offset = keyof typeof variables.offset;
 
-export default variables
+export default variables;

@@ -1,8 +1,8 @@
-import React, {createContext, useState, useContext, useEffect} from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 import ScrollBar from 'smooth-scrollbar';
-import {isTouchDevice} from "@/helpers";
+import { isTouchDevice } from '@/helpers';
 
-type ScrollBarContextType = ScrollBar | Window | null
+type ScrollBarContextType = ScrollBar | Window | null;
 
 const ScrollBarContext = createContext<ScrollBarContextType>(null);
 export const useScrollBar = () => useContext(ScrollBarContext);
@@ -18,7 +18,7 @@ const ScrollBarProvider: React.FC = ({ children }) => {
             });
             setScrollBar(inst);
         } else {
-            setScrollBar(window)
+            setScrollBar(window);
         }
 
         return () => {

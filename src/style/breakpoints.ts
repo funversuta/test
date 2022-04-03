@@ -7,8 +7,8 @@ const breakpoints = {
     fhd: '1920px',
     qhd: '2560px',
     uhd: '3840px'
-}
+};
 
-export type Breakpoints = keyof typeof breakpoints
+export type Breakpoints = keyof typeof breakpoints;
 
-export default breakpoints
+export default breakpoints;
