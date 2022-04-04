@@ -14,9 +14,10 @@ String.prototype.kebabToCamel = function() {
 // Пути до файлов/папок
 const componentFolderPath = './src/components';
 const componentJsonPath = './scripts/components.json';
+const componentTsPath = './src/components/index.ts';
 
 const componentName = process.argv[2];
-const componentFileName = componentName.kebabToCamel().capitalize();
+const componentConstName = componentName.kebabToCamel().capitalize();
 
 // Проверка на пустое имя
 if (!componentName) {
@@ -41,9 +42,10 @@ if (!componentsList.find(component => component === componentName)) {
 }
 
 // Удаление папки
-const componentPath = `${ componentFolderPath }/${ componentFileName }`;
+const componentPath = `${ componentFolderPath }/${ componentConstName }`;
 const findComponent = componentsList.filter(component => component !== componentName);
 fs.writeFileSync(componentJsonPath, JSON.stringify(findComponent, null, 2));
+fs.writeFileSync(componentTsPath, fs.readFileSync(componentTsPath).toString().replace(`export { default as ${componentConstName} } from './${componentConstName}/${componentConstName}';\n`, ''));
 rimraf.sync(componentPath);
 
 console.log(colors.blue(`Компонент ${colors.bold(componentName)} удален`));

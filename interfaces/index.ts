@@ -1,1 +1,1 @@
-export interface Base {}
+export type DeviceTypes = 'mobile' | 'tablet' | 'smallDesktop' | 'desktop';

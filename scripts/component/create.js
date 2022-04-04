@@ -13,6 +13,7 @@ String.prototype.kebabToCamel = function() {
 // Пути до файлов/папок
 const componentFolderPath = './src/components';
 const componentJsonPath = './scripts/components.json';
+const componentTsPath = './src/components/index.ts';
 const componentTplPath = './scripts/component/template.tsxtpl';
 const componentStyledTplPath = './scripts/component/styled.tsxtpl';
 
@@ -44,6 +45,9 @@ if (componentsList.find(component => component === componentName)) {
 // Добавление объекта в JSON
 componentsList.push(componentName);
 fs.writeFileSync(componentJsonPath, JSON.stringify(componentsList, null, 2));
+
+// Добавление стандартного импорта
+fs.writeFileSync(componentTsPath, fs.readFileSync(componentTsPath).toString().concat(`export { default as ${componentConstName} } from './${componentConstName}/${componentConstName}';\n`));
 
 // Создание папки
 fs.mkdirSync(`${componentFolderPath}/${componentConstName}`);

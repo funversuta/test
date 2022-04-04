@@ -1,9 +1,7 @@
 const { i18n } = require('./next-i18next.config');
 const colors = require('colors');
 
-const mainImageDomain = process.env.API_URL?.replace(/(http:\/\/)|(https:\/\/)|(\/api)/g, '')
-
-if (!mainImageDomain) {
+if (!process.env.IMAGE_DOMAIN) {
     console.warn(`${colors.yellow('WARN')} - next.config.js содержит пустой список доменов для next/image`)
 }
 
@@ -19,7 +17,7 @@ module.exports = {
 
     // Конфиг для next/image
     images: {
-        domains: [mainImageDomain || '']
+        domains: [process.env.IMAGE_DOMAIN || '']
     },
 
     // Для пакета @svgr/webpack

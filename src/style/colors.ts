@@ -3,6 +3,6 @@ const colors = {
     black: '#000000'
 };
 
-export type Colors = keyof typeof colors | number;
+export type Colors = keyof typeof colors;
 
 export default colors;

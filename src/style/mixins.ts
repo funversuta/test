@@ -1,8 +1,8 @@
 import breakpoints, { Breakpoints } from './breakpoints';
-import variables, { Offset } from './variables';
+import variables, { Offset, FontFamily } from './variables';
 import colors, { Colors } from './colors';
 import typography, { Typography } from './typography';
-import { FlattenSimpleInterpolation } from 'styled-components';
+import {css, FlattenSimpleInterpolation} from 'styled-components';
 import { rgba } from 'polished';
 
 /**
@@ -65,13 +65,10 @@ export const vh: (value: number, screenHeight?: number) => string = (value, scre
  * @param opacity - Прозрачность;
  * @example
  * color: ${color('white')};
- * background: ${color(1)};
- * @example
  * color: ${color('black', 0.5)};
- * background: ${color(1, 0.3)};
  */
 export const color: (value: Colors, opacity?: number) => string = (value, opacity = 1) => {
-    return rgba((<any>colors)[typeof value === 'number' ? `color${value}` : value], opacity);
+    return rgba(colors[value], opacity);
 };
 
 /**
@@ -115,4 +112,14 @@ export const offset: (type: Offset) => string = (type) => {
  */
 export const font: (name: Typography) => FlattenSimpleInterpolation = (name) => {
     return typography[name];
+};
+
+/**
+ * @param name - Название семейства шрифтов
+ * @returns Стандартные стили для указанного семейства шрифтов
+ */
+export const fontFamily: (name: FontFamily) => FlattenSimpleInterpolation = (name) => {
+    return css`
+        font-family: ${variables.fonts[name]};
+    `;
 };

@@ -10,6 +10,8 @@ const variables = {
     }
 };
 
+export type FontFamily = keyof typeof variables.fonts;
+
 export type Offset = keyof typeof variables.offset;
 
 export default variables;

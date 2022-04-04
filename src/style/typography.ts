@@ -1,36 +1,102 @@
-import breakpoints from './breakpoints';
 import { css, FlattenSimpleInterpolation } from 'styled-components';
 
-type AdaptiveFonts = (mobile: number, tablet: number, desktop: number) => FlattenSimpleInterpolation;
-const getAdaptiveFont: AdaptiveFonts = (mobile, tablet, desktop) => {
+export const rem: (size: number, rootFontSize?: number) => string = (size, rootFontSize = 16) => {
+    return `${size / rootFontSize}rem`;
+};
+
+export const remFluidMiddle: (
+    property: string,
+    minSize: number,
+    tabletSize: number,
+    smallDeskSize: number,
+    maxSize: number,
+    rootFontSize?: number
+) => FlattenSimpleInterpolation = (property, minSize, tabletSize, smallDeskSize, maxSize, rootFontSize = 16) => {
+    const minSizeRem = rem(minSize);
+    const tabletSizeRem = rem(tabletSize);
+    const smallDeskSizeRem = rem(smallDeskSize);
+    const maxSizeRem = rem(maxSize);
+
     return css`
-        font-size: ${mobile}px;
+        //mobile
+        ${property}: ${rem(minSize * 0.8)};
 
-        @media (min-width: ${breakpoints.md}) {
-            font-size: ${tablet}px;
+        @media (min-width: 370px) {
+            ${property}: ${minSizeRem};
         }
 
-        @media (min-width: ${breakpoints.lg}) {
-            font-size: ${(desktop / parseInt(breakpoints.fhd)) * 100}vw;
+
+        @media (min-width: 500px) {
+            ${property}: calc(${minSizeRem} + ( ${tabletSize / rootFontSize} - ${minSize / rootFontSize}) * 
+                            ((100vw - ${rem(370)}) / (767 - 370)));
         }
 
-        @media (min-width: ${breakpoints.fhd}) {
-            font-size: calc(${((desktop / parseInt(breakpoints.fhd)) * 100) / 2}vw + ${((desktop / 1080) * 100) / 2}vh);
+        // tablet
+        @media (min-width: 767px) {
+            ${property}: calc(${tabletSizeRem} + (${smallDeskSize / rootFontSize} - ${tabletSize / rootFontSize}) *
+                            ((100vw - ${rem(767)}) / (1280 - 767)));
+
+
+            @media (max-height: 500px) {
+                ${property}: calc(${minSizeRem} + (${(maxSize / rootFontSize) * 0.6} - ${minSize / rootFontSize}) *
+                ((100vw - ${rem(767)}) / (1280 - 767)));
+            }
+
+            @media (max-height: 750px) {
+                ${property}: calc(${minSizeRem} + (${(maxSize / rootFontSize) * 0.7} - ${minSize / rootFontSize}) *
+                ((100vw - ${rem(767)}) / (1280 - 767)));
+            }
         }
+
+        //min desk
+        @media (min-width: 1280px) {
+            ${property}: calc(${smallDeskSizeRem} + (${maxSize / rootFontSize} - ${smallDeskSize / rootFontSize}) * 
+                ((100vw - ${rem(1280)}) / (1920 - 1280)));
+
+
+            @media (max-height: 500px) {
+                ${property}: calc(${minSizeRem} + (${(maxSize / rootFontSize) * 0.6} - ${minSize / rootFontSize}) *
+                ((100vw - ${rem(767)}) / (1920 - 767)));
+            }
+
+            @media (max-height: 750px) {
+                ${property}: calc(${minSizeRem} + (${(maxSize / rootFontSize) * 0.7} - ${minSize / rootFontSize}) *
+                ((100vw - ${rem(767)}) / (1920 - 767)));
+            }
+                
+        }
+
+        // больше 1920
+        @media (min-width: 1920px) {
+            ${property}: ${maxSizeRem};
+
+            @media (max-height: 500px) {
+                ${property}: calc(${minSizeRem} + (${(maxSize / rootFontSize) * 0.6} - ${minSize / rootFontSize}) *
+                ((100vw - ${rem(767)}) / (1920 - 767)));
+            }
+
+            @media (max-height: 750px) {
+                ${property}: calc(${minSizeRem} + (${(maxSize / rootFontSize) * 0.7} - ${minSize / rootFontSize}) *
+                ((100vw - ${rem(767)}) / (1920 - 767)));
+            }
+        }
+
+        @media (min-width: 2000px) {
+            ${property}: ${(maxSize / 1920) * 100}vw;
+        }
+    
     `;
 };
+export const remAdaptiveFont = (minSize: number, tabletSize: number, smallDeskSize: number, maxSize: number): FlattenSimpleInterpolation => {
+    return remFluidMiddle('font-size', minSize, tabletSize, smallDeskSize, maxSize, 16);
+}
 
 const typography = {
     font16: css`
-        ${getAdaptiveFont(12, 14, 16)};
+        ${remAdaptiveFont(12, 14, 15, 16)};
         line-height: 1;
         font-weight: 400;
     `,
-    font20: css`
-        ${getAdaptiveFont(16, 18, 20)};
-        line-height: 1;
-        font-weight: 400;
-    `
 };
 
 export type Typography = keyof typeof typography;
