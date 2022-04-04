@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import OnlyScroll from "only-scrollbar";
+import OnlyScroll from 'only-scrollbar';
 
 type ScrollBarContextType = OnlyScroll | null;
 
@@ -10,7 +10,7 @@ const ScrollBarProvider: React.FC = ({ children }) => {
     const [scrollBar, setScrollBar] = useState<ScrollBarContextType>(null);
 
     useEffect(() => {
-        setScrollBar(new OnlyScroll(window))
+        setScrollBar(new OnlyScroll(window));
 
         return () => scrollBar?.destroy();
     }, []);
