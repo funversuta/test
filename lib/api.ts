@@ -4,3 +4,6 @@ import indexPage from '../data/index.json';
 // const apiUrl = `${process.env.API_URL}/api`
 
 export const getIndexPage = () => indexPage;
+
+//
+//
