@@ -14,7 +14,7 @@ const fetcherPure = (apiUrl: string) => {
 };
 
 const apiUrl = process.env.API_URL ? process.env.API_URL : '';
-
+//
 const fetcher = fetcherPure(apiUrl);
 
 export default fetcher;
