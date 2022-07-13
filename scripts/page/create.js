@@ -20,40 +20,20 @@ const pageTitle = process.argv[3];
 const pageFileName = pageName.kebabToCamel();
 const pageConstName = pageName.kebabToCamel().capitalize();
 
-// Проверка на пустое имя
-if (!pageName) {
-    console.log(colors.red('Введите название страницы'));
-    return;
-}
-
-// Проверка на пустой заголовок
-if (!pageTitle) {
-    console.log(colors.red('Укажите заголовок страницы'));
-    return;
-}
-
-// Проверка на пустой pages.json
 try {
-    JSON.parse(fs.readFileSync(pageJsonPath).toString());
-} catch {
-    console.log(colors.red(`Файл ${colors.bold('pages.json')} полностью пуст, добавьте хотя бы один компонент (вручную)`));
-    return;
+    if (!pageName) throw new Error('Введите название страницы')
+
+    if (!pageTitle) throw new Error('Укажите заголовок страницы')
+
+    if (fs.readdirSync(path.join(pageFolderPath)).find(page => page === pageName)) {
+        throw new Error(`Страница /${pageName} уже существует`)
+    }
+
+    // Создание файла
+    const pageTemplate = fs.readFileSync(pageTplPath).toString();
+    fs.writeFileSync(`${pageFolderPath}/${pageFileName}.tsx`, eval('`' + pageTemplate + '`'));
+
+    console.log(`[ ${colors.green.bold('SUCCESS')} ] Страница /${pageName} создана`);
+} catch (e) {
+    console.log(`[ ${colors.red.bold('ERROR')} ] ${e.message}`);
 }
-
-const pagesList = JSON.parse(fs.readFileSync(pageJsonPath).toString());
-
-// Проверка на существующую страницу
-if (pagesList.find(page => page === pageName)) {
-    console.log(colors.red(`Страница ${colors.bold(pageName)} уже существует`));
-    return;
-}
-
-// Добавление объекта в JSON
-pagesList.push(pageName);
-fs.writeFileSync(pageJsonPath, JSON.stringify(pagesList, null, 2));
-
-// Создание файла
-const pageTemplate = fs.readFileSync(pageTplPath).toString();
-fs.writeFileSync(`${ pageFolderPath }/${ pageFileName }.tsx`, eval('`' + pageTemplate + '`'));
-
-console.log(colors.blue(`Страница ${colors.bold(pageName)} создана`));

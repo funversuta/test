@@ -14,7 +14,7 @@ import { rgba } from 'polished';
  * }
  */
 export const mediaBreakpointUp: (breakpoint: Breakpoints) => string = (breakpoint) => {
-    return `@media(min-width: ${breakpoints[breakpoint]})`;
+    return `@media(min-width: ${breakpoints[breakpoint]}px)`;
 };
 
 /**
@@ -26,7 +26,7 @@ export const mediaBreakpointUp: (breakpoint: Breakpoints) => string = (breakpoin
  * }
  */
 export const mediaBreakpointDown: (breakpoint: Breakpoints) => string = (breakpoint) => {
-    return `@media(max-width: ${breakpoints[breakpoint]})`;
+    return `@media(max-width: ${breakpoints[breakpoint] - 1}px)`;
 };
 
 /**
@@ -41,7 +41,7 @@ export const mediaBreakpointDown: (breakpoint: Breakpoints) => string = (breakpo
  * }
  */
 export const vw: (value: number, screenWidth?: Breakpoints | number) => string = (value, screenWidth: Breakpoints | number = 1920) => {
-    const widthInPx = typeof screenWidth === 'number' ? screenWidth : parseInt(breakpoints[screenWidth]);
+    const widthInPx = typeof screenWidth === 'number' ? screenWidth : breakpoints[screenWidth];
     return `${(value / widthInPx) * 100}vw`;
 };
 
@@ -91,7 +91,7 @@ export const cols: (value: number) => string = (value) => {
  *     padding: 0 ${offset('tablet')};
  * }
  *
- * ${mediaBreakpointDown('iphone')} {
+ * ${mediaBreakpointDown('xs')} {
  *     padding: 0 ${offset('mobile')};
  * }
  */
@@ -121,5 +121,24 @@ export const font: (name: Typography) => FlattenSimpleInterpolation = (name) => 
 export const fontFamily: (name: FontFamily) => FlattenSimpleInterpolation = (name) => {
     return css`
         font-family: ${variables.fonts[name]};
+    `;
+};
+
+/**
+ * @description Применение стилей для эффектов ховера с помощью медиа-запроса.
+ * @description Медиа-запрос определяет может ли устройство использовать ховеры
+ * @param styles - Стили, применяемые для ховера
+ * @example
+ * ${hover(css`
+ *     opacity: 0.5;
+ * `)}
+ */
+export const hover = (styles: FlattenSimpleInterpolation): FlattenSimpleInterpolation => {
+    return css`
+        @media (hover: hover) {
+            &:hover {
+                ${styles}
+            }
+        }
     `;
 };

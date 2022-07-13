@@ -12,6 +12,10 @@ const ScrollBarProvider: React.FC = ({ children }) => {
     useEffect(() => {
         setScrollBar(new OnlyScroll(window));
 
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
         return () => scrollBar?.destroy();
     }, []);
 

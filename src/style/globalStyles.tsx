@@ -14,8 +14,7 @@ const GlobalStyle = createGlobalStyle`
 
     html {
         font-family: ${variables.fonts.default};
-        -ms-overflow-style: none;
-        scrollbar-width: none;
+        scrollbar-gutter: stable;
         color: ${color('black')};
     }
 

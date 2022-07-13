@@ -17,35 +17,28 @@ const componentJsonPath = './scripts/components.json';
 const componentTsPath = './src/components/index.ts';
 
 const componentName = process.argv[2];
+const componentType = process.argv[3];
 const componentConstName = componentName.kebabToCamel().capitalize();
 
-// Проверка на пустое имя
-if (!componentName) {
-    console.log(colors.red('Введите название компонента'));
-    return;
-}
+const availableComponentTypes = fs.readdirSync(path.join('src', 'components'));
 
-// Проверка на пустой components.json
 try {
-    JSON.parse(fs.readFileSync(componentJsonPath).toString());
-} catch {
-    console.log(colors.red(`Файл ${colors.bold('components.json')} полностью пуст`));
-    return;
+    if (!componentName) throw new Error('Введите название компонента');
+
+    if (!componentType || !availableComponentTypes.includes(componentType)) {
+        throw new Error(`Введите один из существующих типов компонентов: [${availableComponentTypes.join(', ')}]`);
+    }
+    const components = fs.readdirSync(path.join('src', 'components', componentType));
+    if (components.findIndex((component) => component === componentConstName) === -1) {
+        throw new Error('Компонент не существует');
+    }
+
+    const folderPath = path.join('src', 'components', componentType, componentConstName);
+
+    rimraf(folderPath, (err) => {
+        if (err) throw new Error(err.message);
+        console.log(`[ ${colors.green.bold('SUCCESS')} ] Компонент ${componentType}/${componentConstName} удален`);
+    });
+} catch (e) {
+    console.log(`[ ${colors.red.bold('ERROR')} ] ${e.message}`);
 }
-
-const componentsList = JSON.parse(fs.readFileSync(componentJsonPath).toString());
-
-// Проверка на не существующий компонент
-if (!componentsList.find(component => component === componentName)) {
-    console.log(colors.red(`Компонент ${colors.bold(componentName)} не существует`));
-    return;
-}
-
-// Удаление папки
-const componentPath = `${ componentFolderPath }/${ componentConstName }`;
-const findComponent = componentsList.filter(component => component !== componentName);
-fs.writeFileSync(componentJsonPath, JSON.stringify(findComponent, null, 2));
-fs.writeFileSync(componentTsPath, fs.readFileSync(componentTsPath).toString().replace(`export { default as ${componentConstName} } from './${componentConstName}/${componentConstName}';\n`, ''));
-rimraf.sync(componentPath);
-
-console.log(colors.blue(`Компонент ${colors.bold(componentName)} удален`));

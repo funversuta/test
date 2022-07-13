@@ -38,9 +38,7 @@ module.exports = {
     // Компилятор для минификации
     swcMinify: true,
 
-    // Эксперементальные настройки
-    experimental: {
-        // Поддержка swc styledComponent
+    compiler: {
         styledComponents: true
     }
 };

@@ -18,45 +18,34 @@ const componentTplPath = './scripts/component/template.tsxtpl';
 const componentStyledTplPath = './scripts/component/styled.tsxtpl';
 
 const componentName = process.argv[2];
+const componentType = process.argv[3];
 const componentConstName = componentName.kebabToCamel().capitalize();
+const availableComponentTypes = fs.readdirSync(path.join('src', 'components'));
 
-// Проверка на пустое имя
-if (!componentName) {
-    console.log(colors.red('Введите название компонента'));
-    return;
-}
-
-// Проверка на пустой components.json
 try {
-    JSON.parse(fs.readFileSync(componentJsonPath).toString());
-} catch {
-    console.log(colors.red(`Файл ${colors.bold('components.json')} полностью пуст, добавьте хотя бы один компонент (вручную)`));
-    return;
+    if (!componentName) {
+        throw new Error('Введите название компонента')
+    }
+    if (!componentType || !availableComponentTypes.includes(componentType)) {
+        throw new Error(`Введите один из существующих типов компонентов: [${availableComponentTypes.join(', ')}]`);
+    }
+
+    const components = fs.readdirSync(path.join('src', 'components', componentType));
+    if (components.findIndex((component) => component === componentConstName) !== -1) {
+        throw new Error('Компонент уже существует');
+    }
+
+    // Создание папки
+    fs.mkdirSync(path.join(componentFolderPath, componentType, componentConstName));
+
+    // Создание файлов
+    const componentTemplate = fs.readFileSync(componentTplPath).toString();
+    const componentStyledTemplate = fs.readFileSync(componentStyledTplPath).toString();
+
+    fs.writeFileSync(path.join(componentFolderPath, componentType, componentConstName, `${componentConstName}.styled.tsx`), eval('`' + componentStyledTemplate + '`'));
+    fs.writeFileSync(path.join(componentFolderPath, componentType, componentConstName, `${componentConstName}.tsx`), eval('`' + componentTemplate + '`'));
+
+    console.log(`[ ${colors.green.bold('SUCCESS')} ] Компонент ${componentType}/${componentConstName} создан`);
+} catch (e) {
+    console.log(`[ ${colors.red.bold('ERROR')} ] ${e.message}`);
 }
-
-const componentsList = JSON.parse(fs.readFileSync(componentJsonPath).toString());
-
-// Проверка на существующий компонент
-if (componentsList.find(component => component === componentName)) {
-    console.log(colors.red(`Компонент ${colors.bold(componentName)} уже существует`));
-    return;
-}
-
-// Добавление объекта в JSON
-componentsList.push(componentName);
-fs.writeFileSync(componentJsonPath, JSON.stringify(componentsList, null, 2));
-
-// Добавление стандартного импорта
-fs.writeFileSync(componentTsPath, fs.readFileSync(componentTsPath).toString().concat(`export { default as ${componentConstName} } from './${componentConstName}/${componentConstName}';\n`));
-
-// Создание папки
-fs.mkdirSync(`${componentFolderPath}/${componentConstName}`);
-
-// Создание файлов
-const componentTemplate = fs.readFileSync(componentTplPath).toString();
-const componentStyledTemplate = fs.readFileSync(componentStyledTplPath).toString();
-
-fs.writeFileSync(`${componentFolderPath}/${componentConstName}/${componentConstName}.styled.tsx`, eval('`' + componentStyledTemplate + '`'));
-fs.writeFileSync(`${componentFolderPath}/${componentConstName}/${componentConstName}.tsx`, eval('`' + componentTemplate + '`'));
-
-console.log(colors.blue(`Компонент ${colors.bold(componentName)} создан`));

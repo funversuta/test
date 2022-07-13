@@ -1,8 +1,10 @@
 import { GetStaticProps } from 'next'
 import React from "react"
-import Layout from '../components/Layout/Layout'
+import Layout from '@/components/common/Layout/Layout'
+import {BasePageProps} from "@/interfaces";
 
-interface ${pageConstName}Props {
+
+interface ${pageConstName}Props extends BasePageProps {
     /* Page props */
 }
 
@@ -18,7 +20,13 @@ export const getStaticProps: GetStaticProps<${pageConstName}props> = async () =>
 
     return {
         props: {
-            /* Page props */
+            meta: {
+                title: pageTitle,
+                description: '',
+                keywords: ''
+            },
+            header: {},
+            sandwich: {}
         },
         revalidate: 1
     }

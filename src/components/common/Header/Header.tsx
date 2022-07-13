@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from './Header.styled';
 
-interface HeaderProps {
+export interface HeaderProps {
     /* Component Props */
 }
 
