@@ -7,6 +7,7 @@ import { RecoilRoot } from 'recoil';
 import 'swiper/css';
 import { SWRConfig } from 'swr';
 import fetcher from '@/lib/fetcher';
+import { appWithTranslation } from 'next-i18next';
 
 const MyApp = ({ Component, pageProps, router }: AppProps) => {
     const { asPath } = router;
@@ -27,4 +28,4 @@ const MyApp = ({ Component, pageProps, router }: AppProps) => {
     );
 };
 
-export default MyApp;
+export default appWithTranslation(MyApp);

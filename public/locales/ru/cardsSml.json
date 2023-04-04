@@ -1,0 +1,42 @@
+{
+    "cardsSml":{
+        "items": [
+            {
+                "title":"Моя Мишель",
+                "date": "1 апреля, 19:00",
+                "place": "Роза Холл",
+                "image": "/images/cards/1.jpg"
+            },
+            {
+                "title":"Сочи Парк",
+                "date": "март — май",
+                "place": "Сочи Парк",
+                "image": "/images/cards/1.jpg"
+            },
+            {
+                "title":"Concord Orchestra. Симфоническое рок-шоу «Рождение мира»",
+                "date": "1 апреля, 19:00",
+                "place": "Роза Холл",
+                "image": "/images/cards/1.jpg"
+            },
+            {
+                "title":"Конные прогулки по живописным местам Адлера",
+                "date": "март — июнь",
+                "place": "Конные прогулки по живописным...",
+                "image": "/images/cards/1.jpg"
+            },
+            {
+                "title":"«Золотое кольцо Абхазии»: Гагры, Рица, Новый Афон",
+                "date": "апрель — июнь",
+                "place": "Золотое кольцо Абхазии",
+                "image": "/images/cards/1.jpg"
+            },
+            {
+                "title":"New Star Camp. L’One",
+                "date": "1 апреля, 19:00",
+                "place": "Аллея флагов",
+                "image": "/images/cards/1.jpg"
+            }
+        ]
+    }
+}

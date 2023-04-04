@@ -1,0 +1,18 @@
+{
+    "cardsSml":{
+        "items": [
+            {
+                "title":"Моя Мишель",
+                "date": "1 апреля, 19:00",
+                "place": "Роза Холл",
+                "image": "/images/cards/1.jpg"
+            },
+            {
+                "title":"Моя Мишель",
+                "date": "1 апреля, 19:00",
+                "place": "Роза Холл",
+                "image": "/images/cards/1.jpg"
+            }
+        ]
+    }
+}

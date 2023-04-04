@@ -1,36 +1,36 @@
-import { GetStaticProps } from 'next';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import React from 'react';
-import Only from '@/icons/only.svg';
 import Layout from '@/components/common/Layout/Layout';
 import { BasePageProps } from '@/interfaces';
+import CardsSet from '@/components/common/cardsSet/cardsSet';
+import useTranslation from '@/hooks/useTranslation';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import SliderWithWidget from '@/components/common/SliderWithWidget/SliderWithWidget';
 
 interface IndexProps extends BasePageProps {
     /* Page props*/
 }
 
-const Index: React.FC<IndexProps> = (props) => {
+const Index: React.FC<IndexProps & InferGetStaticPropsType<typeof getStaticProps>> = ({ meta }) => {
+    const { t } = useTranslation('cardsSml');
+    const { t: t1 } = useTranslation('SliderWithWidget');
     return (
-        <Layout meta={props.meta} header={props.header} sandwich={props.sandwich}>
-            <h1 style={{ textAlign: 'center', marginTop: '10rem' }}>
-                Hello, World!
-                <Only style={{ marginLeft: '1rem', height: '15px', verticalAlign: 'middle' }} />
-            </h1>
-
-            {/* Page body */}
+        <Layout meta={meta} header={{}} sandwich={{}}>
+            <SliderWithWidget content={t1('SliderWithWidget', { returnObjects: true })} />
+            <CardsSet cards={t('cardsSml.items', { returnObjects: true })} />
         </Layout>
     );
 };
 
-export const getStaticProps: GetStaticProps<IndexProps> = async () => {
+export const getStaticProps: GetStaticProps = async ({ locale = 'ru' }) => {
     return {
         props: {
             meta: {
-                title: 'Title',
+                title: 'Тестовое приложение',
                 description: 'description',
                 keywords: 'keywords'
             },
-            header: {},
-            sandwich: {}
+            ...(await serverSideTranslations(locale, ['common', 'cardsSml', 'SliderWithWidget']))
         },
         revalidate: 1
     };

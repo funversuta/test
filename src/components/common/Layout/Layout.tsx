@@ -5,14 +5,16 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import { BasePageProps } from '@/interfaces';
 import Sandwich from '@/components/common/Sandwich/Sandwich';
+import { DefaultTheme } from 'styled-components';
+import { MyThemeContextProvider } from '../ThemContext/ThemContext';
 
 interface LayoutProps extends BasePageProps {
-    /* Layout props */
+    theme?: DefaultTheme;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, meta, header, sandwich }) => {
     return (
-        <>
+        <MyThemeContextProvider>
             <Head>
                 <title>{meta.title}</title>
                 <meta charSet="utf-8" />
@@ -31,7 +33,7 @@ const Layout: React.FC<LayoutProps> = ({ children, meta, header, sandwich }) => 
                 {children}
                 <Footer />
             </Container>
-        </>
+        </MyThemeContextProvider>
     );
 };
 

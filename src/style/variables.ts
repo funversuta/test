@@ -1,12 +1,15 @@
 const variables = {
     col: 100 / 24,
     offset: {
-        mobile: 30,
-        tablet: 40,
-        desktop: 40
+        mobile: 20,
+        tablet: 36,
+        desktop1280: 100,
+        desktop1440: 100,
+        desktop1920: 160
     },
     videoRatio: (9 / 16) * 100,
     fonts: {
+        GraphikLCGMedium: 'GraphikLCG-Medium',
         default: 'Arial'
     }
 };

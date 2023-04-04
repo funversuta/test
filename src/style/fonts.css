@@ -1,11 +1,8 @@
-/*
-
 @font-face {
-    font-family: '<FontFamily>';
-    src: url('/fonts/<FileName>');
-    font-weight: 400;
+    font-family: 'GraphikLCG-Medium';
+    src: url('/fonts/GraphikLCG-Medium.woff2');
+    src: url('/fonts/GraphikLCG-Medium.woff2') format('woff2'),
+    url('/fonts/GraphikLCG-Medium.woff') format('woff');
     font-style: normal;
     font-display: swap;
 }
-
-*/

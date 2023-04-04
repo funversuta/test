@@ -2,7 +2,7 @@ import breakpoints, { Breakpoints } from './breakpoints';
 import variables, { Offset, FontFamily } from './variables';
 import colors, { Colors } from './colors';
 import typography, { Typography } from './typography';
-import {css, FlattenSimpleInterpolation} from 'styled-components';
+import { css, FlattenSimpleInterpolation } from 'styled-components';
 import { rgba } from 'polished';
 
 /**
@@ -95,11 +95,77 @@ export const cols: (value: number) => string = (value) => {
  *     padding: 0 ${offset('mobile')};
  * }
  */
+
+export const allBreakpointValue = (
+    property: string,
+    desktop1920: number,
+    desktop1440: number,
+    desktop1280?: number,
+    tablet768?: number,
+    mobile375?: number
+) => {
+    let result = '';
+    if (mobile375) {
+        result += ` ${property}: ${vw(mobile375, 375)};`;
+    }
+    if (tablet768) {
+        result += ` ${mediaBreakpointUp('md')} {
+            ${property}: ${vw(tablet768, 768)};
+        }; `;
+    }
+
+    if (desktop1280) {
+        result += ` ${mediaBreakpointUp('xl')} {
+            ${property}: ${vw(desktop1280, 1280)};
+        }; `;
+    }
+
+    result += `
+        ${mediaBreakpointUp('xxl')} {
+            ${property}: ${vw(desktop1440, 1440)};
+        }
+
+        ${mediaBreakpointUp('fhd')} {
+            ${property}: ${vw(desktop1920, 1920)};
+        }
+    `;
+    return result;
+};
+
+export const sideOffsets = (property: string = 'padding', isNegative?: boolean) => {
+    return css`
+        ${property}-left: ${vw(variables.offset.mobile * (isNegative ? -1 : 1), 375)};
+        ${property}-right: ${vw(variables.offset.mobile * (isNegative ? -1 : 1), 375)};
+
+        ${mediaBreakpointUp('md')} {
+            ${property}-left: ${vw(variables.offset.tablet * (isNegative ? -1 : 1), 768)};
+            ${property}-right: ${vw(variables.offset.tablet * (isNegative ? -1 : 1), 768)};
+        }
+
+        ${mediaBreakpointUp('xl')} {
+            ${property}-left: ${vw(variables.offset.desktop1280 * (isNegative ? -1 : 1), 1280)};
+            ${property}-right: ${vw(variables.offset.desktop1280 * (isNegative ? -1 : 1), 1280)};
+        }
+
+        ${mediaBreakpointUp('xxl')} {
+            ${property}-left: ${vw(variables.offset.desktop1440 * (isNegative ? -1 : 1), 1440)};
+            ${property}-right: ${vw(variables.offset.desktop1440 * (isNegative ? -1 : 1), 1440)};
+        }
+
+        ${mediaBreakpointUp('fhd')} {
+            ${property}-left: ${vw(variables.offset.desktop1920 * (isNegative ? -1 : 1), 1920)};
+            ${property}-right: ${vw(variables.offset.desktop1920 * (isNegative ? -1 : 1), 1920)};
+        }
+    `;
+};
+
 export const offset: (type: Offset) => string = (type) => {
     const size = {
         mobile: 375,
         tablet: 768,
-        desktop: 1920
+        desktop1280: 1280,
+        desktop1440: 1440,
+        desktop1920: 1920
     };
     return vw(variables.offset[type], size[type]);
 };

@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import variables from './variables';
-import { color } from './mixins';
+import { color, fontFamily } from './mixins';
 
 const GlobalStyle = createGlobalStyle`
     * {
@@ -13,9 +13,9 @@ const GlobalStyle = createGlobalStyle`
     }
 
     html {
-        font-family: ${variables.fonts.default};
         scrollbar-gutter: stable;
         color: ${color('black')};
+        ${fontFamily('GraphikLCGMedium')};
     }
 
     body {
@@ -23,6 +23,10 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         overscroll-behavior: none;
         overflow: auto;
+
+        &.dark {
+            background: black;
+        }
     }
 
     h1, h2, h3, h4, h5, span, a {
