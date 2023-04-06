@@ -1,4 +1,4 @@
-import { allBreakpointValue, mediaBreakpointUp, vw } from '@/style/mixins';
+import { allBreakpointValue, color, font, mediaBreakpointUp, vw } from '@/style/mixins';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -68,6 +68,12 @@ export const Container = styled.div`
         border-radius: 50%;
     }
 `;
+
+export const Title = styled.span`
+    color: ${color('blue')};
+    ${font('font20_2')};
+`;
+
 export const ValueColor = styled.div`
     margin-right: 20px;
 `;

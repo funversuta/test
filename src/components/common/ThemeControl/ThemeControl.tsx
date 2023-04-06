@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Container, ThemeWrapper, ValueColor } from './ThemeControl.styled';
+import { Container, ThemeWrapper, Title, ValueColor } from './ThemeControl.styled';
 import MyThemeContext from '../ThemContext/ThemContext';
 
 interface ThemeControlProps {
@@ -8,23 +8,25 @@ interface ThemeControlProps {
         light: string;
         dark: string;
     };
-    func?: any;
 }
 
-const ThemeControl: React.FC<ThemeControlProps> = ({ title, color, func }) => {
+const ThemeControl: React.FC<ThemeControlProps> = ({ title, color }) => {
     const [currentColor, setCurrentColor] = useState(color?.light);
-    func(currentColor);
     const themeCtx: { isDarkMode?: boolean; toggleThemeHandler: () => void } = useContext(MyThemeContext);
 
     useEffect(() => {
         const item = localStorage.getItem('default-theme');
-        if (item) setCurrentColor(item);
-
         const radioButton = document.getElementById('radioButton') as HTMLInputElement;
-        item === color?.light ? (radioButton.checked = false) : (radioButton.checked = true);
-        localStorage.setItem('default-theme', currentColor === color?.dark ? color?.light : color?.dark);
-
-        console.log(item, radioButton.checked, themeCtx.isDarkMode, localStorage);
+        console.log(item);
+        if (item) {
+            setCurrentColor(item);
+            item === color?.light ? (radioButton.checked = false) : (radioButton.checked = true);
+            localStorage.setItem('default-theme', currentColor === color?.dark ? color?.light : color?.dark);
+            console.log(item, localStorage);
+        } else {
+            localStorage.setItem('default-theme', color?.light);
+            radioButton.checked = false;
+        }
     }, []);
 
     function myFunction() {
@@ -38,7 +40,7 @@ const ThemeControl: React.FC<ThemeControlProps> = ({ title, color, func }) => {
 
     return (
         <Container>
-            {title}
+            <Title>{title}</Title>
             <ThemeWrapper>
                 <ValueColor>{currentColor}</ValueColor>
                 <label className="switch">

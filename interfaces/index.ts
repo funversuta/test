@@ -29,3 +29,35 @@ export interface BaseUI {
     className?: string;
     children?: React.ReactNode;
 }
+
+export interface Wheather {
+    now_dt: string;
+    geo_object: {
+        locality?: {
+            id: number;
+            name: string;
+        };
+    };
+    fact: {
+        temp: number;
+        condition: string;
+        feels_like: number;
+    };
+    forecasts: [
+        {
+            date: string;
+            date_ts: number;
+            parts: {
+                evening: {
+                    temp_avg: number;
+                };
+                night: {
+                    temp_avg: number;
+                };
+                morning: {
+                    temp_avg: number;
+                };
+            };
+        }
+    ];
+}

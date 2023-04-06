@@ -14,6 +14,7 @@ interface IndexProps extends BasePageProps {
 const Index: React.FC<IndexProps & InferGetStaticPropsType<typeof getStaticProps>> = ({ meta }) => {
     const { t } = useTranslation('cardsSml');
     const { t: t1 } = useTranslation('SliderWithWidget');
+
     return (
         <Layout meta={meta} header={{}} sandwich={{}}>
             <SliderWithWidget content={t1('SliderWithWidget', { returnObjects: true })} />

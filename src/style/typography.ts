@@ -102,6 +102,16 @@ const typography = {
         line-height: 1;
         font-weight: 400;
     `,
+    font20: css`
+        ${remAdaptiveFont(12, 12, 14, 20)};
+        line-height: 1;
+        font-weight: 600;
+    `,
+    font20_2: css`
+        ${remAdaptiveFont(12, 12, 14, 20)};
+        line-height: 1;
+        font-weight: 500;
+    `,
     font26: css`
         ${remAdaptiveFont(14, 14, 17, 26)};
         line-height: 1.4;
@@ -116,6 +126,11 @@ const typography = {
         ${remAdaptiveFont(16, 18, 26, 40)};
         line-height: 1;
         font-weight: 700;
+    `,
+    font80: css`
+        ${remAdaptiveFont(36, 36, 54, 80)};
+        line-height: 1;
+        font-weight: 600;
     `
 };
 

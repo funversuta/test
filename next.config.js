@@ -32,8 +32,20 @@ module.exports = {
 
     // Переменные env, которые необходимо передавать на клиент
     env: {
-        API_URL: process.env.API_URL
+        API_URL: process.env.API_URL,
+        API_URL_YANDEX_WEATHER: process.env.API_URL_YANDEX_WEATHER,
+        API_KEY: process.env.API_KEY,
+        API_KEY2: process.env.API_KEY2
     },
+
+    async rewrites() {
+        return [
+          {
+            source: '/api/:path*',
+            destination: 'http://localhost:8000/:path*' // Proxy to Backend
+          }
+        ]
+      },
 
     // Компилятор для минификации
     swcMinify: true,
