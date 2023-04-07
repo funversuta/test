@@ -4,7 +4,7 @@ env.local from env.local.example
 
 npm i в основной директории и cd ./ProxyServer тоже
 
-далее нужно запустить сервер npm run start /ProxyServer
+далее нужно запустить сервер npm run start в директории /ProxyServer
 
 и npm run dev в основной для старта app
 
