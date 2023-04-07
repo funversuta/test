@@ -15,16 +15,15 @@ SwiperCore.use([Controller, Keyboard, Autoplay]);
 
 const SimpleSlider: React.FC<SimpleSliderProps> = ({ cards, showNavigation }) => {
     const [swiper, setSwiper] = useState<SwiperCore>();
-    const [positionSlider /* , setPositionSlider */] = useState('beginning');
 
     const swiperOptions = {
         allowTouchMove: true,
         grabCursor: true,
         keyboard: false,
-        autoplay: false /* {
+        autoplay: {
             delay: 3000,
-            disableOnInteraction: false
-        } */,
+            disableOnInteraction: true
+        },
         loop: true,
         spaceBetween: 8
     };
@@ -34,7 +33,7 @@ const SimpleSlider: React.FC<SimpleSliderProps> = ({ cards, showNavigation }) =>
             <SimpleSliderSwiper onSwiper={setSwiper} {...swiperOptions}>
                 {cards?.items?.map((item: any, index: number) => (
                     <SwiperSlide key={index}>
-                        {showNavigation && <SliderNavigation swiper={swiper} position={positionSlider} />}
+                        {showNavigation && <SliderNavigation swiper={swiper} position={'beginning'} />}
                         <Card {...item} />
                     </SwiperSlide>
                 ))}

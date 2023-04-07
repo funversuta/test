@@ -1,4 +1,4 @@
-import { allBreakpointValue, font, sideOffsets } from '@/style/mixins';
+import { allBreakpointValue, font, mediaBreakpointUp, sideOffsets } from '@/style/mixins';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -16,4 +16,9 @@ export const Title = styled.div`
 export const MainContent = styled.div`
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
+
+    ${mediaBreakpointUp('md')} {
+        flex-direction: row;
+    }
 `;

@@ -32,6 +32,9 @@ export interface BaseUI {
 
 export interface Wheather {
     now_dt: string;
+    info: {
+        url: string;
+    };
     geo_object: {
         locality?: {
             id: number;

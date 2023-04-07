@@ -1,27 +1,54 @@
 import styled, { css } from 'styled-components';
-import { allBreakpointValue, color, mediaBreakpointUp, vw } from '@/style/mixins';
+import { allBreakpointValue, color, mediaBreakpointUp } from '@/style/mixins';
 
 export const Container = styled.div`
-    display: none;
+    display: flex;
+    align-items: center;
     position: absolute;
     ${allBreakpointValue('margin', 40, 28, 28, 20, 12)};
     right: 0;
     z-index: 10;
 
-    ${mediaBreakpointUp('xl')} {
-        display: flex;
-        align-items: center;
-    }
-
     .swiper-button {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 20px;
+        padding: 8px;
         border-radius: 50px;
         cursor: pointer;
         transition: opacity 0.3s ease-in-out;
         background: ${color('white', 0.15)};
+
+        svg {
+            display: block;
+            stroke: ${color('white')};
+            transition: transform 0.3s ease-in-out;
+            width: 18px;
+            height: 18px;
+
+            ${mediaBreakpointUp('xl')} {
+                stroke-width: 2px;
+                width: 20px;
+                height: 20px;
+            }
+
+            ${mediaBreakpointUp('fhd')} {
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+        ${mediaBreakpointUp('md')} {
+            padding: 9px;
+        }
+
+        ${mediaBreakpointUp('xl')} {
+            padding: 10px;
+        }
+
+        ${mediaBreakpointUp('fhd')} {
+            padding: 16px;
+        }
 
         &.disabled {
             opacity: 0.3;
@@ -37,12 +64,25 @@ export const Container = styled.div`
 
                 svg {
                     transform: rotate(-180deg);
+                    padding-left: 6px;
+
+                    ${mediaBreakpointUp('fhd')} {
+                        padding-left: 10px;
+                    }
                 }
             }
         `}
 
         &.next {
             ${allBreakpointValue('margin-left', 10, 8, 7, 8, 8)};
+
+            svg {
+                padding-left: 6px;
+
+                ${mediaBreakpointUp('fhd')} {
+                    padding-left: 10px;
+                }
+            }
             ${css`
                 &:hover:not(.disabled) {
                     svg {
@@ -50,14 +90,6 @@ export const Container = styled.div`
                     }
                 }
             `}
-        }
-
-        svg {
-            display: block;
-            padding-left: ${vw(5, 'fhd')};
-            stroke: ${color('white')};
-            stroke-width: 2px;
-            transition: transform 0.3s ease-in-out;
         }
     }
 `;

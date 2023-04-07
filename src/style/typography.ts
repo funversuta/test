@@ -92,6 +92,11 @@ export const remAdaptiveFont = (
 };
 
 const typography = {
+    font14: css`
+        ${remAdaptiveFont(10, 10, 12, 14)};
+        line-height: 1;
+        font-weight: 400;
+    `,
     font18: css`
         ${remAdaptiveFont(12, 12, 12, 18)};
         line-height: 1;

@@ -12,20 +12,18 @@ interface ThemeControlProps {
 
 const ThemeControl: React.FC<ThemeControlProps> = ({ title, color }) => {
     const [currentColor, setCurrentColor] = useState(color?.light);
-    const themeCtx: { isDarkMode?: boolean; toggleThemeHandler: () => void } = useContext(MyThemeContext);
+    const themeCtx: { isDarkMode?: boolean; toggleThemeHandler: () => void } = useContext(MyThemeContext); //dlya css
 
     useEffect(() => {
-        const item = localStorage.getItem('default-theme');
+        const item = localStorage.getItem('isDarkTheme');
         const radioButton = document.getElementById('radioButton') as HTMLInputElement;
-        console.log(item);
+        console.log(localStorage);
         if (item) {
-            setCurrentColor(item);
-            item === color?.light ? (radioButton.checked = false) : (radioButton.checked = true);
-            localStorage.setItem('default-theme', currentColor === color?.dark ? color?.light : color?.dark);
-            console.log(item, localStorage);
+            item === 'true' ? setCurrentColor(color?.dark) : setCurrentColor(color?.light);
+            item === 'true' ? (radioButton.checked = true) : (radioButton.checked = false);
         } else {
-            localStorage.setItem('default-theme', color?.light);
             radioButton.checked = false;
+            localStorage.setItem('isDarkTheme', 'false');
         }
     }, []);
 
@@ -33,7 +31,6 @@ const ThemeControl: React.FC<ThemeControlProps> = ({ title, color }) => {
         const radioButton = document.getElementById('radioButton') as HTMLInputElement;
 
         radioButton.value === color?.light ? setCurrentColor(color?.dark) : setCurrentColor(color?.light);
-        localStorage.setItem('default-theme', currentColor === color?.dark ? color?.light : color?.dark);
 
         themeCtx.toggleThemeHandler();
     }

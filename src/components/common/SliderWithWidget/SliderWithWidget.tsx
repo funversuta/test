@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, MainContent, Title } from './SliderWithWidget.styled';
 import SimpleSlider from '../SimpleSlider/SimpleSlider';
-import WidgetWeather from '../WidgetWeather/WidgetWeather';
+import Widgets from '../Widgets/Widgets';
 
 interface SliderWithWidgetProps {
     content: {
@@ -14,11 +14,10 @@ interface SliderWithWidgetProps {
 const SliderWithWidget: React.FC<SliderWithWidgetProps> = ({ content }) => {
     return (
         <Container>
-            {console.log(content)}
             <Title>{content.title}</Title>
             <MainContent>
                 <SimpleSlider cards={content.slider} showNavigation={true} />
-                <WidgetWeather theme={content.theme} />
+                <Widgets theme={content.theme} />
             </MainContent>
         </Container>
     );

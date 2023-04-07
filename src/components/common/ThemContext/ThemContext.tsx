@@ -19,9 +19,9 @@ export function MyThemeContextProvider(props: ThemePropsInterface): ReactElement
 
     function initialThemeHandler(): void {
         if (isLocalStorageEmpty()) {
-            localStorage.setItem('isDarkTheme', `false`);
+            localStorage.setItem('isDarkTheme', `true`);
             document!.querySelector('body')!.classList.remove('dark');
-            setIsDarkTheme(false);
+            setIsDarkTheme(true);
         } else {
             const isDarkTheme: boolean = JSON.parse(localStorage.getItem('isDarkTheme')!);
             isDarkTheme && document!.querySelector('body')!.classList.add('dark');

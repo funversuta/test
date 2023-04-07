@@ -1,0 +1,26 @@
+{
+    "wheather":{
+        "overcast": "Пасмурно",
+        "partly-cloudy": "Малооблачно",
+        "clear": "Ясно",
+        "cloudy": "Облачно с прояснениями",
+        "drizzle": "Морось",
+        "light-rain": "Небольшой дождь",
+        "overcast-and-light-rain":"Пасмурно и небольшой дождь",
+        "rain": "Дождь",
+        "moderate-rain": "Умеренно сильный дождь",
+        "heavy-rain": "Сильный дождь",
+        "continuous-heavy-rain": "Длительный сильный дождь",
+        "showers":"Ливень ",
+        "wet-snow": "Дождь со снегом",
+        "light-snow": "Небольшой снег",
+        "snow": "Снег",
+        "snow-showers": "Снегопад",
+        "hail": "Град",
+        "thunderstorm": "Гроза",
+        "thunderstorm-with-rain": "Дождь с грозой",
+        "thunderstorm-with-hail": "Гроза с градом",
+        "feels_like": "Ощущается как: +"
+    }
+    
+}

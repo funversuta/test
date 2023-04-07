@@ -1,30 +1,46 @@
-import { allBreakpointValue, color, font, mediaBreakpointUp, vw } from '@/style/mixins';
+import { allBreakpointValue, color, font, mediaBreakpointUp } from '@/style/mixins';
 import styled from 'styled-components';
 
 export const Container = styled.div`
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    ${mediaBreakpointUp('md')} {
+        flex-direction: column;
+        justify-content: unset;
+        align-items: start;
+    }
+
     background: #f3f3f3;
     border-radius: 16px;
     ${allBreakpointValue('margin-top', 20, 12, 12, 12, 12)};
     padding: 12px;
 
     ${mediaBreakpointUp('fhd')} {
-        padding: ${vw(20, 'fhd')};
+        padding: 20px;
     }
 
     .switch {
         position: relative;
         display: inline-block;
-        width: 60px;
-        height: 28px;
+        ${allBreakpointValue('width', 54, 34, 34, 26, 26)};
+        height: 14px;
+
+        ${mediaBreakpointUp('xl')} {
+            height: 18px;
+        }
+
+        ${mediaBreakpointUp('fhd')} {
+            height: 28px;
+        }
     }
 
-    /* Hide default HTML checkbox */
     .switch input {
         display: none;
     }
 
-    /* The slider */
     .slider {
         position: absolute;
         cursor: pointer;
@@ -32,19 +48,39 @@ export const Container = styled.div`
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: #ccc;
+        border: 1px solid ${color('dark', 0.2)};
         transition: 0.4s;
     }
 
     .slider:before {
         position: absolute;
         content: '';
-        height: 21px;
-        width: 21px;
-        left: 4px;
-        bottom: 4px;
-        background-color: white;
+        height: 10px;
+        width: 10px;
+        top: 1px;
+        left: 2px;
+        bottom: 2px;
+        background-color: ${color('blue')};
         transition: 0.4s;
+
+        ${mediaBreakpointUp('xl')} {
+            height: 14px;
+            width: 14px;
+        }
+
+        ${mediaBreakpointUp('fhd')} {
+            top: 2px;
+            left: 3px;
+            bottom: 3px;
+            width: 21px;
+            height: 21px;
+        }
+    }
+
+    input:checked + .slider:before {
+        background-color: ${color('white')};
+        left: auto;
+        right: 2px;
     }
 
     input:checked + .slider {
@@ -53,10 +89,6 @@ export const Container = styled.div`
 
     input:focus + .slider {
         box-shadow: 0 0 1px #2196f3;
-    }
-
-    input:checked + .slider:before {
-        transform: translateX(26px);
     }
 
     /* Rounded sliders */
@@ -75,11 +107,25 @@ export const Title = styled.span`
 `;
 
 export const ValueColor = styled.div`
-    margin-right: 20px;
+    margin-right: 12px;
+
+    ${mediaBreakpointUp('md')} {
+        margin-right: 20px;
+    }
 `;
 
 export const ThemeWrapper = styled.div`
-    margin-top: 10px;
     display: flex;
     align-items: center;
+
+    ${mediaBreakpointUp('md')} {
+        margin-top: 5px;
+    }
+
+    ${mediaBreakpointUp('xl')} {
+        margin-top: 8px;
+    }
+    ${mediaBreakpointUp('xxl')} {
+        margin-top: 10px;
+    }
 `;

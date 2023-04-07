@@ -37,17 +37,20 @@ export const CardImage = styled(Image)`
     border-radius: 16px;
     height: 220px;
     display: flex;
+
+    ${mediaBreakpointUp('xl')} {
+        height: ${vw(200, 'xl')};
+    }
     ${mediaBreakpointUp('fhd')} {
         width: ${vw(506, 'fhd')};
         height: ${vw(300, 'fhd')};
     }
 `;
 export const TextCardWrapper = styled.div`
-    margin-top: ${vw(20, 'fhd')};
+    ${allBreakpointValue('margin-top', 20, 12, 12, 8, 8)};
 `;
 
 export const TitleCard = styled.div`
-    color: ${color('dark')};
     ${font('font26')};
 `;
 
@@ -59,7 +62,7 @@ export const DescriptionCard = styled.div`
 export const DescriptionWrapper = styled.div`
     ${allBreakpointValue('margin-top', 20, 12, 12, 8, 8)};
     display: flex;
-    color: ${color('dark', 0.6)};
+
     ${font('font18')};
 `;
 export const Point = styled.div`

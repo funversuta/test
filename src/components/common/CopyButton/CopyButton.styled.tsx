@@ -1,11 +1,12 @@
-import { color, vw } from '@/style/mixins';
+import { allBreakpointValue, color } from '@/style/mixins';
 import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
     position: absolute;
-    inset: ${vw(20, 'fhd')};
-    width: ${vw(50, 'fhd')};
-    height: ${vw(50, 'fhd')};
+    ${allBreakpointValue('inset', 20, 12, 12, 12, 12)};
+    ${allBreakpointValue('width', 50, 34, 34, 30, 30)};
+    ${allBreakpointValue('height', 50, 34, 34, 30, 30)};
+
     border-width: 0px;
     z-index: 2;
 
@@ -13,7 +14,9 @@ export const Container = styled.div`
         border-radius: 50px;
         border-width: 0px;
         background: ${color('dark', 0.2)};
-        padding: ${vw(15, 'fhd')};
+        ${allBreakpointValue('width', 50, 34, 34, 30, 30)};
+        ${allBreakpointValue('height', 50, 34, 34, 30, 30)};
+        ${allBreakpointValue('padding', 13, 9, 9, 8, 8)};
         transition: opacity 0.3s;
         transition-duration: 0.3s;
         text-decoration: none;
@@ -26,6 +29,10 @@ export const Container = styled.div`
                 opacity: 0.2;
             }
         `}
+        svg {
+            ${allBreakpointValue('width', 24, 16, 16, 14, 14)};
+            ${allBreakpointValue('height', 24, 16, 16, 14, 14)};
+        }
     }
 
     input {

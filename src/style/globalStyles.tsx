@@ -1,6 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 import variables from './variables';
 import { color, fontFamily } from './mixins';
+import { Container as TitleCard, DescriptionWrapper } from '@/components/common/Card/Card.styled';
+import { Title } from '@/components/common/SliderWithWidget/SliderWithWidget.styled';
 
 const GlobalStyle = createGlobalStyle`
     * {
@@ -26,6 +28,26 @@ const GlobalStyle = createGlobalStyle`
 
         &.dark {
             background: black;
+
+            ${TitleCard}{
+                color: ${color('white', 0.8)};
+            }
+
+            ${DescriptionWrapper}{
+                color: ${color('white', 0.6)};
+            }
+
+            ${Title}{
+                color: ${color('white')};
+            }
+        }
+
+        ${TitleCard}{
+            color:  ${color('dark')};
+        }
+
+        ${DescriptionWrapper}{
+            color: ${color('dark', 0.6)};
         }
     }
 
