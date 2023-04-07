@@ -34,7 +34,6 @@ module.exports = {
     env: {
         API_URL: process.env.API_URL,
         API_URL_YANDEX_WEATHER: process.env.API_URL_YANDEX_WEATHER,
-        API_KEY: process.env.API_KEY,
         API_KEY2: process.env.API_KEY2
     },
 

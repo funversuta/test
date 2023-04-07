@@ -1,4 +1,4 @@
-import { allBreakpointValue, color, font, mediaBreakpointUp } from '@/style/mixins';
+import { allBreakpointValue, color, font, fontFamily, mediaBreakpointUp } from '@/style/mixins';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -108,7 +108,8 @@ export const Title = styled.span`
 
 export const ValueColor = styled.div`
     margin-right: 12px;
-
+    ${fontFamily('Roboto')};
+    ${font('font18_2')};
     ${mediaBreakpointUp('md')} {
         margin-right: 20px;
     }

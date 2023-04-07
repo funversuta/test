@@ -17,10 +17,14 @@ const ThemeControl: React.FC<ThemeControlProps> = ({ title, color }) => {
     useEffect(() => {
         const item = localStorage.getItem('isDarkTheme');
         const radioButton = document.getElementById('radioButton') as HTMLInputElement;
-        console.log(localStorage);
         if (item) {
-            item === 'true' ? setCurrentColor(color?.dark) : setCurrentColor(color?.light);
-            item === 'true' ? (radioButton.checked = true) : (radioButton.checked = false);
+            if (item === 'true') {
+                setCurrentColor(color?.dark);
+                radioButton.checked = true;
+            } else {
+                setCurrentColor(color?.light);
+                radioButton.checked = false;
+            }
         } else {
             radioButton.checked = false;
             localStorage.setItem('isDarkTheme', 'false');

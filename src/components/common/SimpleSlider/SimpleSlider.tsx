@@ -30,14 +30,20 @@ const SimpleSlider: React.FC<SimpleSliderProps> = ({ cards, showNavigation }) =>
 
     return (
         <Container>
-            <SimpleSliderSwiper onSwiper={setSwiper} {...swiperOptions}>
-                {cards?.items?.map((item: any, index: number) => (
-                    <SwiperSlide key={index}>
-                        {showNavigation && <SliderNavigation swiper={swiper} position={'beginning'} />}
-                        <Card {...item} />
-                    </SwiperSlide>
-                ))}
-            </SimpleSliderSwiper>
+            {cards?.items?.length > 1 ? (
+                <>
+                    <SimpleSliderSwiper onSwiper={setSwiper} {...swiperOptions}>
+                        {cards?.items?.map((item: any, index: number) => (
+                            <SwiperSlide key={index}>
+                                {showNavigation && <SliderNavigation swiper={swiper} position={'beginning'} />}
+                                <Card {...item} />
+                            </SwiperSlide>
+                        ))}
+                    </SimpleSliderSwiper>
+                </>
+            ) : (
+                <Card {...cards?.items[0]} />
+            )}
         </Container>
     );
 };

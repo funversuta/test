@@ -39,7 +39,6 @@ const Widget: React.FC<WidgetProps> = () => {
                 const event = new Date(Weather?.now_dt);
                 setDate(dataFormat(event));
             }
-            console.log(t(`wheather.overcast`, { returnObjects: true }));
         };
 
         fetchData().catch(() => {
@@ -58,7 +57,7 @@ const Widget: React.FC<WidgetProps> = () => {
                             <>
                                 {SvgElements['vector']}{' '}
                                 <Title>
-                                    Погода в{' '}
+                                    {t(`Погода в`, { returnObjects: true }) + ' '}
                                     <a target="_blank" href={Weather.info.url ?? ''} rel="noreferrer">
                                         {Weather?.geo_object?.locality?.name}
                                     </a>
@@ -104,25 +103,45 @@ const Widget: React.FC<WidgetProps> = () => {
                         {Weather?.forecasts[0]?.parts ? (
                             <>
                                 <Element>
-                                    <Text>Вечером</Text>
+                                    <Text>{t(`Вечером`, { returnObjects: true })}</Text>
                                     {SvgElements['cloud']}
                                     <Numbers>
-                                        {'+' + Weather?.forecasts[0]?.parts?.evening?.temp_avg || <Skeleton />}
-                                        <p className="percent"></p>
+                                        {Weather?.forecasts[0]?.parts?.evening?.temp_avg != undefined ? (
+                                            <>
+                                                +{Weather?.forecasts[0]?.parts?.evening?.temp_avg}
+                                                <p className="percent"></p>
+                                            </>
+                                        ) : (
+                                            <Skeleton />
+                                        )}
                                     </Numbers>
                                 </Element>
                                 <Element>
-                                    <Text>Ночью</Text>
+                                    <Text>{t(`Ночью`, { returnObjects: true })}</Text>
                                     {SvgElements['cloud']}
                                     <Numbers>
-                                        {'+' + Weather?.forecasts[0]?.parts?.night?.temp_avg || <Skeleton />} <p className="percent"></p>
+                                        {Weather?.forecasts[0]?.parts?.night?.temp_avg != undefined ? (
+                                            <>
+                                                +{Weather?.forecasts[0]?.parts?.night?.temp_avg}
+                                                <p className="percent"></p>
+                                            </>
+                                        ) : (
+                                            <Skeleton />
+                                        )}
                                     </Numbers>
                                 </Element>
                                 <Element>
-                                    <Text>Утром</Text>
+                                    <Text>{t(`Утром`, { returnObjects: true })}</Text>
                                     {SvgElements['cloud']}
                                     <Numbers>
-                                        {'+' + Weather?.forecasts[0]?.parts?.morning?.temp_avg || <Skeleton />} <p className="percent"></p>
+                                        {Weather?.forecasts[0]?.parts?.morning?.temp_avg != undefined ? (
+                                            <>
+                                                +{Weather?.forecasts[0]?.parts?.morning?.temp_avg}
+                                                <p className="percent"></p>
+                                            </>
+                                        ) : (
+                                            <Skeleton />
+                                        )}
                                     </Numbers>
                                 </Element>
                             </>

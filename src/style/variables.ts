@@ -10,6 +10,7 @@ const variables = {
     videoRatio: (9 / 16) * 100,
     fonts: {
         GraphikLCGMedium: 'GraphikLCG-Medium',
+        Roboto: 'Roboto-Regular',
         default: 'Arial'
     }
 };
