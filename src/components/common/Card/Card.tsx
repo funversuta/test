@@ -13,7 +13,7 @@ export interface cardsSetProps {
 const Card: React.FC<cardsSetProps> = ({ title, date, place, image, description }) => {
     return (
         <Container>
-            <CopyButton value={`${title + ' ' + date + ' ' + place}`} />
+            <CopyButton value={`${title} ${date} ${place}`} />
             {image && <CardImage src={image} layout="fill" objectFit="cover" />}
             <TextCardWrapper>
                 <TitleCard>{title}</TitleCard>

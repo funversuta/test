@@ -12,7 +12,7 @@ interface ThemeControlProps {
 
 const ThemeControl: React.FC<ThemeControlProps> = ({ title, color }) => {
     const [currentColor, setCurrentColor] = useState(color?.light);
-    const themeCtx: { isDarkMode?: boolean; toggleThemeHandler: () => void } = useContext(MyThemeContext); //dlya css
+    const themeCtx = useContext(MyThemeContext); //dlya css
 
     useEffect(() => {
         const item = localStorage.getItem('isDarkTheme');

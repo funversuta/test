@@ -5,7 +5,7 @@ import Widgets from '../Widgets/Widgets';
 
 interface SliderWithWidgetProps {
     content: {
-        title?: any;
+        title?: string;
         slider?: any;
         theme?: any;
     };

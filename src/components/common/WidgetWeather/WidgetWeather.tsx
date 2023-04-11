@@ -42,9 +42,10 @@ const Widget: React.FC<WidgetProps> = () => {
         };
 
         fetchData().catch(() => {
-            console.error, setError(true); // "Uh-oh!"
+            console.error();
+            setError(true); // "Uh-oh!"
         });
-    }, [Weather == null]);
+    }, [Weather]);
 
     return (
         <Container>

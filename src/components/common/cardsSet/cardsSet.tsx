@@ -14,7 +14,7 @@ export interface cardsSetProps {
 const CardsSet: React.FC<cardsSetProps> = ({ cards }) => {
     return (
         <Container>
-            {cards?.map((item: any, index: number) => (
+            {cards?.map((item, index) => (
                 <React.Fragment key={index}>
                     <Card {...item} />
                 </React.Fragment>
