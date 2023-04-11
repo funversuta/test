@@ -206,6 +206,23 @@ export const Numbers = styled.span`
 `;
 
 export const Number = styled.span`
+    position: relative;
+    ${font('font80')};
+    margin-left: 10px;
+    padding-right: 10px;
+
+    /* Функция css в данном случае не нужна */
+    ${css`
+        ${mediaBreakpointUp('xl')} {
+            margin-left: 15px;
+            padding-right: 12px;
+        }
+        ${mediaBreakpointUp('fhd')} {
+            margin-left: ${vw(24, 'fhd')};
+            padding-right: 20px;
+        }
+    `}
+
     .percent {
         ${allBreakpointValue('width', 20, 13, 13, 10, 10)};
         ${allBreakpointValue('height', 20, 13, 13, 10, 10)};
@@ -224,19 +241,4 @@ export const Number = styled.span`
             border: 6px solid ${color('dark')};
         }
     }
-    position: relative;
-    ${font('font80')};
-    margin-left: 10px;
-    padding-right: 10px;
-
-    ${css`
-        ${mediaBreakpointUp('xl')} {
-            margin-left: 15px;
-            padding-right: 12px;
-        }
-        ${mediaBreakpointUp('fhd')} {
-            margin-left: ${vw(24, 'fhd')};
-            padding-right: 20px;
-        }
-    `}
 `;

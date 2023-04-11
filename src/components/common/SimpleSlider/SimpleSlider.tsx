@@ -6,6 +6,7 @@ import { SwiperSlide } from 'swiper/react';
 import SliderNavigation from '../SliderNavigation/SliderNavigation';
 
 interface SimpleSliderProps {
+    // Слишком много типов any
     cards?: any;
     showNavigation?: boolean;
     onSwiper?: (swiper: SwiperCore) => void;

@@ -12,6 +12,7 @@ interface SliderNavigationProps {
 const SliderNavigation: React.FC<SliderNavigationProps> = ({ swiper, position, className }) => {
     return (
         <Container className={className}>
+            {/* Такое лучше сделать через styled.button и вместо classNames прокидывать props */}
             <div
                 className={`swiper-button prev ${position === 'beginning' && !swiper?.loopedSlides ? 'disabled' : ''}`}
                 onClick={() => swiper?.slidePrev()}

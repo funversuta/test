@@ -9,6 +9,7 @@ interface ThemePropsInterface {
     children?: JSX.Element | Array<JSX.Element>;
 }
 
+// Можно использовать встроенный ThemeProvider от styled-components
 export function MyThemeContextProvider(props: ThemePropsInterface): ReactElement {
     const [isDarkTheme, setIsDarkTheme] = useState(false);
     useEffect(() => initialThemeHandler());
