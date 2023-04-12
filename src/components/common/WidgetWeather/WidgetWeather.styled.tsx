@@ -1,5 +1,5 @@
 import { allBreakpointValue, color, font, mediaBreakpointUp, vw } from '@/style/mixins';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const Container = styled.div`
     position: relative;
@@ -195,16 +195,15 @@ export const Numbers = styled.span`
     ${font('font20')};
     margin-left: 4px;
     padding-right: 6px;
-    ${css`
-        ${mediaBreakpointUp('xl')} {
-            margin-left: 8px;
-        }
 
-        ${mediaBreakpointUp('fhd')} {
-            padding-right: 10px;
-            margin-left: ${vw(10, 'fhd')};
-        }
-    `}
+    ${mediaBreakpointUp('xl')} {
+        margin-left: 8px;
+    }
+
+    ${mediaBreakpointUp('fhd')} {
+        padding-right: 10px;
+        margin-left: ${vw(10, 'fhd')};
+    }
 `;
 
 export const Number = styled.span`

@@ -2,14 +2,9 @@
 
 env.local from env.local.example
 
-npm i в основной директории и cd ./ProxyServer тоже
+npm i
 
-далее нужно запустить сервер npm run start в директории /ProxyServer
-
-и npm run dev в основной для старта app
-
-Если не включить сервер, можно увидеть скелетон и затем ошибку(на месте контента виджета)
-
+npm run dev для старта app
 
 https://www.figma.com/file/KZFpEOEbdJHo9lxl3NgFlJ/Junior--%3E-Junior%2B?node-id=36-4&t=Z2cWZBvhYQIUogux-0
 

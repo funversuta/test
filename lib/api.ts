@@ -18,3 +18,5 @@ const createAxiosInstance = (baseURL: string | undefined, API_KEY: string | unde
 const axiosOpenApiInstance = createAxiosInstance(process.env.API_URL_YANDEX_WEATHER, process.env.API_KEY2);
 
 export const getWeather = (params?: any): Promise<AxiosPromise> => axiosOpenApiInstance.get(`/`, { params });
+
+export const getWeatherFetch = (params?: any): Promise<AxiosPromise> => axios.post(`/api/getWeather`, { params });

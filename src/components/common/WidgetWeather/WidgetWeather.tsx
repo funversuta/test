@@ -18,7 +18,7 @@ import {
     PercentIcon
 } from './WidgetWeather.styled';
 import { SvgElements } from '@/helpers/icons';
-import { getWeather } from '@/lib/api';
+import { getWeatherFetch } from '@/lib/api';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { Wheather } from '@/interfaces';
@@ -36,11 +36,14 @@ const Widget: React.FC<WidgetProps> = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await getWeather({ lat: 43.5992, lon: 39.7257, lang: 'ru_RU' });
-            if (data) setWeather(data.data);
-            if (Weather?.now_dt) {
-                const event = new Date(Weather?.now_dt);
-                setDate(dataFormat(event));
+            const data = await getWeatherFetch({ lat: 43.5992, lon: 39.7257, lang: 'ru_RU' });
+            if (data) {
+                console.log(Weather);
+                if (data.data?.now_dt) {
+                    const event = new Date(data.data?.now_dt);
+                    setDate(dataFormat(event));
+                }
+                setWeather(data.data);
             }
         };
 
@@ -48,7 +51,9 @@ const Widget: React.FC<WidgetProps> = () => {
             console.error();
             setError(true); // "Uh-oh!"
         });
-    }, [Weather]);
+    }, []); /* При Weather'e постоянно идут запросы из юзэффекта, 
+    при weather == null шёл второй запрос для обновления даты после получения данных, 
+    поправил setWeather после присовоения даты */
 
     return (
         <Container>
@@ -62,7 +67,7 @@ const Widget: React.FC<WidgetProps> = () => {
                                 {SvgElements['vector']}{' '}
                                 <Title>
                                     {t(`Погода в`, { returnObjects: true }) + ' '}
-                                    <Link href={Weather.info.url ?? ''} passHref>
+                                    <Link href={Weather?.info?.url ?? ''} passHref>
                                         <MyLink target="_blank">{Weather?.geo_object?.locality?.name}</MyLink>
                                     </Link>
                                 </Title>
@@ -88,7 +93,7 @@ const Widget: React.FC<WidgetProps> = () => {
                         </Row>
                         <Row2>
                             <RregularText>
-                                {(Weather != null && t(`wheather.${Weather?.fact.condition}`, { returnObjects: true })) || <Skeleton />}
+                                {(Weather != null && t(`wheather.${Weather?.fact?.condition}`, { returnObjects: true })) || <Skeleton />}
                             </RregularText>
                             {Weather?.fact?.feels_like ? (
                                 <RregularText>
@@ -104,7 +109,7 @@ const Widget: React.FC<WidgetProps> = () => {
                         </Row2>
                     </Middle>
                     <Bottom>
-                        {Weather?.forecasts[0]?.parts ? (
+                        {Weather?.forecasts && Weather?.forecasts[0]?.parts ? (
                             <>
                                 <Element>
                                     <Text>{t(`Вечером`, { returnObjects: true })}</Text>

@@ -22,7 +22,7 @@ export const baseParallax = (element: HTMLElement, offset: number, multiply: num
 };
 
 export const dataFormat = (date: Date) => {
-    const options = { weekday: 'long', month: 'long', day: 'numeric' } as const;
+    const options = { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'Europe/Moscow' } as const;
 
     const DateWrap = date?.toLocaleDateString('ru-RU', options);
 

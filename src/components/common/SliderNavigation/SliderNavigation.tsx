@@ -1,30 +1,27 @@
 import React from 'react';
-import { Container } from './SliderNavigation.styled';
+import { Button, Container } from './SliderNavigation.styled';
 import Swiper from 'swiper';
 import Arrow from '@/icons/arrow.svg';
 
 interface SliderNavigationProps {
     swiper?: Swiper;
     position?: string;
-    className?: string;
 }
 
-const SliderNavigation: React.FC<SliderNavigationProps> = ({ swiper, position, className }) => {
+const SliderNavigation: React.FC<SliderNavigationProps> = ({ swiper, position }) => {
     return (
-        <Container className={className}>
+        <Container>
             {/* Такое лучше сделать через styled.button и вместо classNames прокидывать props */}
-            <div
-                className={`swiper-button prev ${position === 'beginning' && !swiper?.loopedSlides ? 'disabled' : ''}`}
-                onClick={() => swiper?.slidePrev()}
+            <Button Prev isOver={position === 'beginning' && !swiper?.loopedSlides ? true : false} onClick={() => swiper?.slidePrev()}>
+                <Arrow />
+            </Button>
+            <Button
+                Next
+                isOver={position === 'end' && !swiper?.loopedSlides ? true : false}
+                onClick={() => swiper?.slideNext() && console.log(swiper)}
             >
                 <Arrow />
-            </div>
-            <div
-                className={`swiper-button next ${position === 'end' && !swiper?.loopedSlides ? 'disabled' : ''}`}
-                onClick={() => swiper?.slideNext()}
-            >
-                <Arrow />
-            </div>
+            </Button>
         </Container>
     );
 };

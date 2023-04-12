@@ -8,72 +8,79 @@ export const Container = styled.div`
     ${allBreakpointValue('margin', 40, 28, 28, 20, 12)};
     right: 0;
     z-index: 10;
+`;
 
-    .swiper-button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 8px;
-        border-radius: 50px;
-        cursor: pointer;
-        transition: opacity 0.3s ease-in-out;
-        background: ${color('white', 0.15)};
+export const Button = styled.button<{ Prev?: boolean; isOver?: boolean; Next?: boolean }>`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+    background: ${color('white', 0.15)};
+    border-width: 0px;
 
-        svg {
-            display: block;
-            stroke: ${color('white')};
-            transition: transform 0.3s ease-in-out;
-            width: 18px;
-            height: 18px;
+    ${mediaBreakpointUp('md')} {
+        padding: 9px;
+    }
 
-            ${mediaBreakpointUp('xl')} {
-                stroke-width: 2px;
-                width: 20px;
-                height: 20px;
-            }
+    ${mediaBreakpointUp('xl')} {
+        padding: 10px;
+    }
 
-            ${mediaBreakpointUp('fhd')} {
-                width: 28px;
-                height: 28px;
-            }
-        }
+    ${mediaBreakpointUp('fhd')} {
+        padding: 16px;
+    }
 
-        ${mediaBreakpointUp('md')} {
-            padding: 9px;
-        }
+    svg {
+        display: block;
+        stroke: ${color('white')};
+        transition: transform 0.3s ease-in-out;
+        width: 18px;
+        height: 18px;
 
         ${mediaBreakpointUp('xl')} {
-            padding: 10px;
+            stroke-width: 2px;
+            width: 20px;
+            height: 20px;
         }
 
         ${mediaBreakpointUp('fhd')} {
-            padding: 16px;
+            width: 28px;
+            height: 28px;
         }
+    }
 
-        &.disabled {
+    ${({ isOver }) =>
+        isOver &&
+        css`
             opacity: 0.3;
             cursor: default;
-        }
-        ${css`
-            &.prev {
-                &:hover:not(.disabled) {
-                    svg {
-                        transform: translateX(-5px) rotate(-180deg);
-                    }
-                }
-
-                svg {
-                    transform: rotate(-180deg);
-                    padding-left: 6px;
-
-                    ${mediaBreakpointUp('fhd')} {
-                        padding-left: 10px;
-                    }
-                }
-            }
         `}
 
-        &.next {
+    ${({ Prev, isOver }) =>
+        Prev &&
+        css`
+            &:hover {
+                svg {
+                    transform: ${isOver ? '' : 'translateX(-5px) rotate(-180deg)'};
+                }
+            }
+
+            svg {
+                transform: rotate(-180deg);
+                padding-left: 6px;
+
+                ${mediaBreakpointUp('fhd')} {
+                    padding-left: 10px;
+                }
+            }
+        `};
+
+    ${({ Next, isOver }) =>
+        Next &&
+        css`
             ${allBreakpointValue('margin-left', 10, 8, 7, 8, 8)};
 
             svg {
@@ -83,13 +90,11 @@ export const Container = styled.div`
                     padding-left: 10px;
                 }
             }
-            ${css`
-                &:hover:not(.disabled) {
-                    svg {
-                        transform: translateX(5px);
-                    }
+
+            &:hover:not(.disabled) {
+                svg {
+                    transform: ${isOver ? '' : 'translateX(5px)'};
                 }
-            `}
-        }
-    }
+            }
+        `};
 `;
