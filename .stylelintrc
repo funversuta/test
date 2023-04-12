@@ -1,4 +1,10 @@
 {
+  "rules": {
+    "no-descending-specificity": null,
+    "property-no-vendor-prefix": null,
+    "value-no-vendor-prefix": null,
+    "selector-type-no-unknown": null
+},
   "processors": [
     "stylelint-processor-styled-components"
   ],

@@ -13,7 +13,9 @@ import {
     ActualDate,
     RregularText,
     Row,
-    Row2
+    Row2,
+    MyLink,
+    PercentIcon
 } from './WidgetWeather.styled';
 import { SvgElements } from '@/helpers/icons';
 import { getWeather } from '@/lib/api';
@@ -22,7 +24,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import { Wheather } from '@/interfaces';
 import { dataFormat } from '@/helpers';
 import useTranslation from '@/hooks/useTranslation';
-import Link from 'next/link';
+import Link from 'next/dist/client/link';
 
 interface WidgetProps {}
 
@@ -60,8 +62,8 @@ const Widget: React.FC<WidgetProps> = () => {
                                 {SvgElements['vector']}{' '}
                                 <Title>
                                     {t(`Погода в`, { returnObjects: true }) + ' '}
-                                    <Link target="_blank" href={Weather.info.url ?? ''}>
-                                        {Weather?.geo_object?.locality?.name}
+                                    <Link href={Weather.info.url ?? ''} passHref>
+                                        <MyLink target="_blank">{Weather?.geo_object?.locality?.name}</MyLink>
                                     </Link>
                                 </Title>
                             </>
@@ -77,7 +79,7 @@ const Widget: React.FC<WidgetProps> = () => {
                                     {SvgElements['rainy']}{' '}
                                     <Number>
                                         {'+' + Weather?.fact?.temp}
-                                        <p className="percent"></p>
+                                        <PercentIcon />
                                     </Number>
                                 </>
                             ) : (
@@ -93,7 +95,7 @@ const Widget: React.FC<WidgetProps> = () => {
                                     {t('wheather.feels_like', { returnObjects: true })}
                                     <Condition>
                                         {Weather?.fact?.feels_like}
-                                        <p className="percent"></p>
+                                        <PercentIcon />
                                     </Condition>
                                 </RregularText>
                             ) : (
@@ -111,7 +113,7 @@ const Widget: React.FC<WidgetProps> = () => {
                                         {Weather?.forecasts[0]?.parts?.evening?.temp_avg != undefined ? (
                                             <>
                                                 +{Weather?.forecasts[0]?.parts?.evening?.temp_avg}
-                                                <p className="percent"></p>
+                                                <PercentIcon />
                                             </>
                                         ) : (
                                             <Skeleton />
@@ -125,7 +127,7 @@ const Widget: React.FC<WidgetProps> = () => {
                                         {Weather?.forecasts[0]?.parts?.night?.temp_avg != undefined ? (
                                             <>
                                                 +{Weather?.forecasts[0]?.parts?.night?.temp_avg}
-                                                <p className="percent"></p>
+                                                <PercentIcon />
                                             </>
                                         ) : (
                                             <Skeleton />
@@ -139,7 +141,7 @@ const Widget: React.FC<WidgetProps> = () => {
                                         {Weather?.forecasts[0]?.parts?.morning?.temp_avg != undefined ? (
                                             <>
                                                 +{Weather?.forecasts[0]?.parts?.morning?.temp_avg}
-                                                <p className="percent"></p>
+                                                <PercentIcon />
                                             </>
                                         ) : (
                                             <Skeleton />

@@ -39,17 +39,13 @@ export interface Theme {
 }
 
 export interface SliderProps {
-    slider?: {
-        items: [
-            {
-                title: string;
-                description?: string;
-                date: string;
-                place: string;
-                image: string;
-            }
-        ];
-    };
+    items: {
+        title: string;
+        description?: string;
+        date: string;
+        place: string;
+        image: string;
+    }[];
 }
 export interface Wheather {
     now_dt: string;

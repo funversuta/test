@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 import { Container, SimpleSliderSwiper } from './SimpleSlider.styled';
-import Card from '../Card/Card';
+import Card, { cardsProps } from '../Card/Card';
 import SwiperCore, { Controller, Keyboard, Autoplay } from 'swiper';
 import { SwiperSlide } from 'swiper/react';
 import SliderNavigation from '../SliderNavigation/SliderNavigation';
 
 interface SimpleSliderProps {
     // Слишком много типов any
-    cards?: any;
+    cards: {
+        items: {
+            title: string;
+            description?: string;
+            date: string;
+            place: string;
+            image: string;
+        }[];
+    };
     showNavigation?: boolean;
     onSwiper?: (swiper: SwiperCore) => void;
 }
@@ -31,10 +39,10 @@ const SimpleSlider: React.FC<SimpleSliderProps> = ({ cards, showNavigation }) =>
 
     return (
         <Container>
-            {cards?.items?.length > 1 ? (
+            {cards.items.length > 1 ? (
                 <>
                     <SimpleSliderSwiper onSwiper={setSwiper} {...swiperOptions}>
-                        {cards?.items?.map((item: any, index: number) => (
+                        {cards.items.map((item: cardsProps, index: number) => (
                             <SwiperSlide key={index}>
                                 {showNavigation && <SliderNavigation swiper={swiper} position={'beginning'} />}
                                 <Card {...item} />

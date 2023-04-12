@@ -15,13 +15,15 @@ export const Top = styled.div`
     display: flex;
     align-items: center;
 
-    a:hover {
-        text-decoration: underline;
-    }
-
     .react-loading-skeleton {
         ${allBreakpointValue('width', 330, 252, 221, 135, 311)};
         height: 20px;
+    }
+`;
+
+export const MyLink = styled.a`
+    &:hover {
+        text-decoration: underline;
     }
 `;
 
@@ -128,6 +130,21 @@ export const RregularText = styled.span`
     }
 `;
 
+export const PercentIcon = styled.span`
+    ${allBreakpointValue('width', 8, 5, 5, 4, 4)};
+    ${allBreakpointValue('height', 8, 5, 5, 4, 4)};
+    border: 1px solid ${color('dark')};
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 50%;
+    margin: 0;
+
+    ${mediaBreakpointUp('fhd')} {
+        border: 2px solid ${color('dark')};
+    }
+`;
+
 export const Condition = styled.span`
     position: relative;
     width: fit-content;
@@ -139,7 +156,7 @@ export const Condition = styled.span`
         padding-right: 10px;
     }
 
-    .percent {
+    ${PercentIcon} {
         ${allBreakpointValue('width', 8, 5, 5, 4, 4)};
         ${allBreakpointValue('height', 8, 5, 5, 4, 4)};
         border: 1px solid ${color('dark')};
@@ -171,21 +188,6 @@ export const Element = styled.div`
             height: 14px;
         }
     }
-
-    .percent {
-        ${allBreakpointValue('width', 8, 5, 5, 4, 4)};
-        ${allBreakpointValue('height', 8, 5, 5, 4, 4)};
-        border: 1px solid ${color('dark')};
-        position: absolute;
-        top: 0;
-        right: 0;
-        border-radius: 50%;
-        margin: 0;
-
-        ${mediaBreakpointUp('fhd')} {
-            border: 2px solid ${color('dark')};
-        }
-    }
 `;
 
 export const Numbers = styled.span`
@@ -211,19 +213,16 @@ export const Number = styled.span`
     margin-left: 10px;
     padding-right: 10px;
 
-    /* Функция css в данном случае не нужна */
-    ${css`
-        ${mediaBreakpointUp('xl')} {
-            margin-left: 15px;
-            padding-right: 12px;
-        }
-        ${mediaBreakpointUp('fhd')} {
-            margin-left: ${vw(24, 'fhd')};
-            padding-right: 20px;
-        }
-    `}
+    ${mediaBreakpointUp('xl')} {
+        margin-left: 15px;
+        padding-right: 12px;
+    }
+    ${mediaBreakpointUp('fhd')} {
+        margin-left: ${vw(24, 'fhd')};
+        padding-right: 20px;
+    }
 
-    .percent {
+    ${PercentIcon} {
         ${allBreakpointValue('width', 20, 13, 13, 10, 10)};
         ${allBreakpointValue('height', 20, 13, 13, 10, 10)};
         border: 3px solid ${color('dark')};

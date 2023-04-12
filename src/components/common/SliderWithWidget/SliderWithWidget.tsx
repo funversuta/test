@@ -7,7 +7,7 @@ import { SliderProps, Theme } from '@/interfaces';
 interface SliderWithWidgetProps {
     content: {
         title?: string;
-        slider?: SliderProps;
+        slider: SliderProps;
         theme: Theme;
     };
     toggleTheme: () => void;

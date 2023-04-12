@@ -7,6 +7,7 @@ export interface cardsSetProps {
         title: string;
         date: string;
         place: string;
+        description?: string;
         image: string;
     }[];
 }

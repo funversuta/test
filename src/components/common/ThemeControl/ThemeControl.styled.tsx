@@ -1,5 +1,5 @@
 import { allBreakpointValue, color, font, fontFamily, mediaBreakpointUp } from '@/style/mixins';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const Container = styled.div`
     position: relative;
@@ -102,27 +102,25 @@ export const Switch = styled.label`
     height: 14px;
     ${allBreakpointValue('width', 54, 34, 34, 26, 26)};
 
-    ${css`
-        ${mediaBreakpointUp('xl')} {
-            height: 18px;
-        }
+    ${mediaBreakpointUp('xl')} {
+        height: 18px;
+    }
 
-        ${mediaBreakpointUp('fhd')} {
-            height: 28px;
-        }
+    ${mediaBreakpointUp('fhd')} {
+        height: 28px;
+    }
 
-        ${Checkbox}:checked + ${SliderRound}:before {
-            background-color: ${color('white')};
-            left: auto;
-            right: 2px;
-        }
+    ${Checkbox}:checked + ${SliderRound}:before {
+        background-color: ${color('white')};
+        left: auto;
+        right: 2px;
+    }
 
-        ${Checkbox}:checked + ${SliderRound} {
-            background-color: ${color('blue')};
-        }
+    ${Checkbox}:checked + ${SliderRound} {
+        background-color: ${color('blue')};
+    }
 
-        ${Checkbox}:focus {
-            box-shadow: 0 0 1px ${color('blue')};
-        }
-    `}
+    ${Checkbox}:focus {
+        box-shadow: 0 0 1px ${color('blue')};
+    }
 `;
