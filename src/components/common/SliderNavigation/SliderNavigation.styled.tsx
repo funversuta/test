@@ -91,7 +91,7 @@ export const Button = styled.button<{ Prev?: boolean; isOver?: boolean; Next?: b
                 }
             }
 
-            &:hover:not(.disabled) {
+            &:hover {
                 svg {
                     transform: ${isOver ? '' : 'translateX(5px)'};
                 }
