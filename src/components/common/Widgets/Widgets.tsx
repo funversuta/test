@@ -2,22 +2,18 @@ import React from 'react';
 import { Container } from './Widgets.styled';
 import ThemeControl from '../ThemeControl/ThemeControl';
 import WidgetWeather from '../WidgetWeather/WidgetWeather';
+import { Theme } from '@/interfaces';
 
 interface WidgetsProps {
-    theme?: {
-        title?: string;
-        color: {
-            light: string;
-            dark: string;
-        };
-    };
+    theme: Theme;
+    toggleTheme: () => void;
 }
 
-const Widgets: React.FC<WidgetsProps> = ({ theme }) => {
+const Widgets: React.FC<WidgetsProps> = ({ theme, toggleTheme }) => {
     return (
         <Container>
             <WidgetWeather />
-            {theme?.color && <ThemeControl color={theme.color} title={theme.title} />}
+            <ThemeControl color={theme.color} title={theme.title} toggleTheme={toggleTheme} />
         </Container>
     );
 };

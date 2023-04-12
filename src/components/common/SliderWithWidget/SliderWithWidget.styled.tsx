@@ -12,6 +12,7 @@ export const Container = styled.div`
 export const Title = styled.div`
     ${font('font36')};
     ${allBreakpointValue('margin-bottom', 28, 25, 20, 12, 20)};
+    color: ${({ theme }) => theme.secondary.text};
 `;
 export const MainContent = styled.div`
     display: flex;

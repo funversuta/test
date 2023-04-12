@@ -22,6 +22,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import { Wheather } from '@/interfaces';
 import { dataFormat } from '@/helpers';
 import useTranslation from '@/hooks/useTranslation';
+import Link from 'next/link';
 
 interface WidgetProps {}
 
@@ -59,9 +60,9 @@ const Widget: React.FC<WidgetProps> = () => {
                                 {SvgElements['vector']}{' '}
                                 <Title>
                                     {t(`Погода в`, { returnObjects: true }) + ' '}
-                                    <a target="_blank" href={Weather.info.url ?? ''} rel="noreferrer">
+                                    <Link target="_blank" href={Weather.info.url ?? ''}>
                                         {Weather?.geo_object?.locality?.name}
-                                    </a>
+                                    </Link>
                                 </Title>
                             </>
                         ) : (

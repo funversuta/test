@@ -3,7 +3,7 @@ import { Container } from './CopyButton.styled';
 import { SvgElements } from '@/helpers/icons';
 
 interface CopyButtonProps {
-    value?: any;
+    value?: string;
 }
 
 const CopyButton: React.FC<CopyButtonProps> = ({ value = '' }) => {

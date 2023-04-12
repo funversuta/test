@@ -52,6 +52,7 @@ export const TextCardWrapper = styled.div`
 
 export const TitleCard = styled.div`
     ${font('font26')};
+    color: ${({ theme }) => (theme.secondary.text === 'white' ? color('white', 0.8) : color('dark'))};
 `;
 
 export const DescriptionCard = styled.div`
@@ -62,7 +63,7 @@ export const DescriptionCard = styled.div`
 export const DescriptionWrapper = styled.div`
     ${allBreakpointValue('margin-top', 20, 12, 12, 8, 8)};
     display: flex;
-
+    color: ${({ theme }) => (theme.secondary.text === 'white' ? color('white', 0.6) : color('dark', 0.6))};
     ${font('font18')};
 `;
 export const Point = styled.div`

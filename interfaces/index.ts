@@ -30,6 +30,27 @@ export interface BaseUI {
     children?: React.ReactNode;
 }
 
+export interface Theme {
+    title?: string;
+    color: {
+        dark: string;
+        light: string;
+    };
+}
+
+export interface SliderProps {
+    slider?: {
+        items: [
+            {
+                title: string;
+                description?: string;
+                date: string;
+                place: string;
+                image: string;
+            }
+        ];
+    };
+}
 export interface Wheather {
     now_dt: string;
     info: {

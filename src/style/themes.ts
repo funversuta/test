@@ -1,11 +1,21 @@
 import { DefaultTheme } from 'styled-components';
 
 export const baseTheme: DefaultTheme = {
-    background: 'white',
-    text: 'black'
+    main: {
+        background: 'white',
+        text: 'dark'
+    },
+    secondary: {
+        text: 'dark'
+    }
 };
 
 export const DarkTheme: DefaultTheme = {
-    background: 'black',
-    text: 'white'
+    main: {
+        background: 'dark',
+        text: 'white'
+    },
+    secondary: {
+        text: 'white'
+    }
 };

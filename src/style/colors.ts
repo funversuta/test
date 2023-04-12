@@ -7,4 +7,11 @@ const colors = {
 
 export type Colors = keyof typeof colors;
 
+export type ColorsKeys = {
+    [value in Colors]: value;
+};
+
+export type BasicBackgrounds = keyof Pick<ColorsKeys, 'white' | 'dark'>;
+export type TextColors = keyof Pick<ColorsKeys, 'white' | 'dark'>;
+
 export default colors;
