@@ -3,12 +3,12 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
     position: relative;
-    background: #f3f3f3;
+    background: ${color('lightGray')};
     border-radius: 16px;
-    ${allBreakpointValue('padding', 20, 14, 14, 12, 12)};
-    ${allBreakpointValue('height', 439, 324, 304, 291, 172)};
     display: flex;
     flex-direction: column;
+    ${allBreakpointValue('padding', 20, 14, 14, 12, 12)};
+    ${allBreakpointValue('height', 439, 324, 304, 291, 172)};
 `;
 
 export const Top = styled.div`

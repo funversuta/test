@@ -14,7 +14,6 @@ interface SliderWithWidgetProps {
 }
 
 const SliderWithWidget: React.FC<SliderWithWidgetProps> = ({ content, toggleTheme }) => {
-    console.log(content.theme);
     return (
         <Container>
             <Title>{content.title}</Title>

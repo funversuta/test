@@ -2,7 +2,8 @@ const colors = {
     white: '#FFFFFF',
     black: '#000000',
     dark: '#232323',
-    blue: '#157BFB'
+    blue: '#157BFB',
+    lightGray: '#f3f3f3'
 };
 
 export type Colors = keyof typeof colors;
