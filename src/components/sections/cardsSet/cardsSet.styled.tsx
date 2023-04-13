@@ -1,7 +1,8 @@
+import AppearAnimation from '@/components/common/AppearAnimation/AppearAnimation';
 import { allBreakpointValue, sideOffsets } from '@/style/mixins';
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled(AppearAnimation)`
     position: relative;
     display: flex;
     flex-wrap: wrap;

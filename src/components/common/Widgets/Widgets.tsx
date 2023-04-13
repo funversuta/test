@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from './Widgets.styled';
-import ThemeControl from '../ThemeControl/ThemeControl';
+import ThemeControl from '../../blocks/ThemeControl/ThemeControl';
 import WidgetWeather from '../WidgetWeather/WidgetWeather';
 import { Theme } from '@/interfaces';
 

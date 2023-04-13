@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, SimpleSliderSwiper } from './SimpleSlider.styled';
-import Card, { cardsProps } from '../Card/Card';
+import Card, { cardsProps } from '../../blocks/Card/Card';
 import SwiperCore, { Controller, Keyboard, Autoplay } from 'swiper';
 import { SwiperSlide } from 'swiper/react';
 import SliderNavigation from '../SliderNavigation/SliderNavigation';

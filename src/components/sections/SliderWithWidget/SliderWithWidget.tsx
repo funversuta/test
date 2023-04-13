@@ -1,9 +1,8 @@
 import React from 'react';
 import { Container, MainContent, Title } from './SliderWithWidget.styled';
-import SimpleSlider from '../SimpleSlider/SimpleSlider';
-import Widgets from '../Widgets/Widgets';
+import SimpleSlider from '../../common/SimpleSlider/SimpleSlider';
+import Widgets from '../../common/Widgets/Widgets';
 import { SliderProps, Theme } from '@/interfaces';
-import AppearAnimation from '../AppearAnimation/AppearAnimation';
 
 interface SliderWithWidgetProps {
     content: {
@@ -16,13 +15,11 @@ interface SliderWithWidgetProps {
 
 const SliderWithWidget: React.FC<SliderWithWidgetProps> = ({ content, toggleTheme }) => {
     return (
-        <Container>
+        <Container options={{ target: 'top' }}>
             <Title>{content.title}</Title>
             <MainContent>
                 <SimpleSlider cards={content.slider} showNavigation={true} />
-                <AppearAnimation options={{ target: 'top' }}>
-                    <Widgets theme={content.theme} toggleTheme={toggleTheme} />
-                </AppearAnimation>
+                <Widgets theme={content.theme} toggleTheme={toggleTheme} />
             </MainContent>
         </Container>
     );

@@ -53,7 +53,7 @@ export interface Wheather {
         url: string;
     };
     geo_object: {
-        locality?: {
+        locality: {
             id: number;
             name: string;
         };

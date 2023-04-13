@@ -1,11 +1,10 @@
 import { allBreakpointValue, color, font, mediaBreakpointUp } from '@/style/mixins';
 import styled from 'styled-components';
 import { Swiper } from 'swiper/react';
-import { Container as Card, CardImage, DescriptionWrapper, Point, TextCardWrapper, TitleCard } from '../Card/Card.styled';
-import { Container as CopyButton } from '../CopyButton/CopyButton.styled';
-import AppearAnimation from '../AppearAnimation/AppearAnimation';
+import { Container as Card, CardImage, DescriptionWrapper, Point, TextCardWrapper, TitleCard } from '../../blocks/Card/Card.styled';
+import { Container as CopyButton } from '../../blocks/CopyButton/CopyButton.styled';
 
-export const Container = styled(AppearAnimation)`
+export const Container = styled.div`
     position: relative;
     width: 100%;
     ${mediaBreakpointUp('md')} {

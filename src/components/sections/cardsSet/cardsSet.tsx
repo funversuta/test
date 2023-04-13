@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from './cardsSet.styled';
-import Card from '../Card/Card';
+import Card from '../../blocks/Card/Card';
 
 export interface cardsSetProps {
     cards?: {

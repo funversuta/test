@@ -17,7 +17,6 @@ export interface AppearAnimationProps extends BaseUI {
         target?: TargetAnimation;
     };
     mode?: AppearAnimationModes;
-    tag?: string;
 }
 
 // TODO: Как-то не очень понятно получилось, надо подправить
@@ -48,8 +47,8 @@ const AppearAnimation: React.FC<AppearAnimationProps> = (props) => {
     const options = { ...defaultOption, ...props.options };
 
     const generateChildren = useCallback((): React.ReactElement => {
-        return React.createElement(props.tag ?? 'div', { dangerouslySetInnerHTML: { __html: props.children } });
-    }, [props.tag, props.children]);
+        return React.createElement('div', { dangerouslySetInnerHTML: { __html: props.children } });
+    }, [props.children]);
 
     const children = typeof props.children === 'string' ? generateChildren() : props.children;
 
