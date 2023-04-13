@@ -39,7 +39,7 @@ const SimpleSlider: React.FC<SimpleSliderProps> = ({ cards, showNavigation }) =>
     };
 
     return (
-        <Container options={{ target: 'top' }}>
+        <Container>
             {cards.items.length > 1 ? (
                 <>
                     <SimpleSliderSwiper
