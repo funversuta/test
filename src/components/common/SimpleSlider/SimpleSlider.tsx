@@ -31,7 +31,7 @@ const SimpleSlider: React.FC<SimpleSliderProps> = ({ cards, showNavigation }) =>
         grabCursor: true,
         keyboard: false,
         autoplay: {
-            delay: 3000,
+            delay: 5000,
             disableOnInteraction: true
         },
         loop: true,
@@ -39,7 +39,7 @@ const SimpleSlider: React.FC<SimpleSliderProps> = ({ cards, showNavigation }) =>
     };
 
     return (
-        <Container>
+        <Container options={{ target: 'top' }}>
             {cards.items.length > 1 ? (
                 <>
                     <SimpleSliderSwiper

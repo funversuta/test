@@ -10,7 +10,7 @@ export const Container = styled.div`
     z-index: 10;
 `;
 
-export const Button = styled.button<{ Prev?: boolean; isOver?: boolean; Next?: boolean }>`
+export const Button = styled.button<{ isOver?: boolean; Reverse?: boolean }>`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -59,42 +59,39 @@ export const Button = styled.button<{ Prev?: boolean; isOver?: boolean; Next?: b
             cursor: default;
         `}
 
-    ${({ Prev, isOver }) =>
-        Prev &&
-        css`
-            &:hover {
-                svg {
-                    transform: ${isOver ? '' : 'translateX(-5px) rotate(-180deg)'};
-                }
-            }
+    ${({ Reverse, isOver }) =>
+        Reverse
+            ? css`
+                  &:hover {
+                      svg {
+                          transform: ${isOver ? '' : 'translateX(-5px) rotate(-180deg)'};
+                      }
+                  }
 
-            svg {
-                transform: rotate(-180deg);
-                padding-left: 6px;
+                  svg {
+                      transform: rotate(-180deg);
+                      padding-left: 6px;
 
-                ${mediaBreakpointUp('fhd')} {
-                    padding-left: 10px;
-                }
-            }
-        `};
+                      ${mediaBreakpointUp('fhd')} {
+                          padding-left: 10px;
+                      }
+                  }
+              `
+            : css`
+                  ${allBreakpointValue('margin-left', 10, 8, 7, 8, 8)};
 
-    ${({ Next, isOver }) =>
-        Next &&
-        css`
-            ${allBreakpointValue('margin-left', 10, 8, 7, 8, 8)};
+                  svg {
+                      padding-left: 6px;
 
-            svg {
-                padding-left: 6px;
+                      ${mediaBreakpointUp('fhd')} {
+                          padding-left: 10px;
+                      }
+                  }
 
-                ${mediaBreakpointUp('fhd')} {
-                    padding-left: 10px;
-                }
-            }
-
-            &:hover {
-                svg {
-                    transform: ${isOver ? '' : 'translateX(5px)'};
-                }
-            }
-        `};
+                  &:hover {
+                      svg {
+                          transform: ${isOver ? '' : 'translateX(5px)'};
+                      }
+                  }
+              `};
 `;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Checkbox, Container, SliderRound, Switch, ThemeWrapper, Title, ValueColor } from './ThemeControl.styled';
+import { Container, Input, SliderRound, Switch, ThemeWrapper, Title, ValueColor } from './ThemeControl.styled';
 
 interface ThemeControlProps {
     title?: string;
@@ -42,7 +42,7 @@ const ThemeControl: React.FC<ThemeControlProps> = ({ title, color, toggleTheme }
             <ThemeWrapper>
                 <ValueColor>{currentColor}</ValueColor>
                 <Switch>
-                    <Checkbox id="radioButton" value={currentColor} onChange={myFunction} />
+                    <Input id="radioButton" value={currentColor} onChange={myFunction} />
                     <SliderRound></SliderRound>
                 </Switch>
             </ThemeWrapper>

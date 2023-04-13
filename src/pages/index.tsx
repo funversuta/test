@@ -6,6 +6,7 @@ import CardsSet from '@/components/common/cardsSet/cardsSet';
 import useTranslation from '@/hooks/useTranslation';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import SliderWithWidget from '@/components/common/SliderWithWidget/SliderWithWidget';
+import AppearAnimation from '@/components/common/AppearAnimation/AppearAnimation';
 
 interface IndexProps extends BasePageProps {
     /* Page props*/
@@ -18,7 +19,9 @@ const Index: React.FC<IndexProps & InferGetStaticPropsType<typeof getStaticProps
     return (
         <Layout meta={props.meta} header={{}} sandwich={{}}>
             <SliderWithWidget content={t1('SliderWithWidget', { returnObjects: true })} toggleTheme={props.toggleTheme} />
-            <CardsSet cards={t('cardsSml.items', { returnObjects: true })} />
+            <AppearAnimation>
+                <CardsSet cards={t('cardsSml.items', { returnObjects: true })} />
+            </AppearAnimation>
         </Layout>
     );
 };

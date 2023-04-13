@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import Image from '@/components/common/Image/Image';
 import { allBreakpointValue, color, font, mediaBreakpointUp, vw } from '@/style/mixins';
 export const Container = styled.div`
@@ -10,20 +10,19 @@ export const Container = styled.div`
     }
 
     ${mediaBreakpointUp('xl')} {
-        ${css`
-            width: 31.5%;
-            &:nth-child(n + 4) {
-                margin-top: ${vw(35, 'xl')};
-            }
-        `}
+        width: 31.5%;
+
+        &:nth-child(n + 4) {
+            margin-top: ${vw(35, 'xl')};
+        }
     }
+
     ${mediaBreakpointUp('xxl')} {
         width: 31.62%;
-        ${css`
-            &:nth-child(n + 4) {
-                margin-top: ${vw(40, 'fhd')};
-            }
-        `}
+
+        &:nth-child(n + 4) {
+            margin-top: ${vw(40, 'fhd')};
+        }
     }
 `;
 
@@ -69,7 +68,7 @@ export const DescriptionWrapper = styled.div`
 export const Point = styled.div`
     width: 6px;
     height: 6px;
-    background: rgba(35, 35, 35, 0.6);
+    background: ${({ theme }) => (theme.secondary.text === 'white' ? color('white', 0.6) : color('dark', 0.6))};
     margin-left: ${vw(20, 'fhd')};
     margin-right: ${vw(20, 'fhd')};
     border-radius: 25px;

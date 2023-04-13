@@ -12,11 +12,10 @@ const SliderNavigation: React.FC<SliderNavigationProps> = ({ swiper, position })
     return (
         <Container>
             {/* Такое лучше сделать через styled.button и вместо classNames прокидывать props */}
-            <Button Prev isOver={position === 'beginning' && !swiper?.loopedSlides ? true : false} onClick={() => swiper?.slidePrev()}>
+            <Button Reverse isOver={position === 'beginning' && !swiper?.loopedSlides ? true : false} onClick={() => swiper?.slidePrev()}>
                 <Arrow />
             </Button>
             <Button
-                Next
                 isOver={position === 'end' && !swiper?.loopedSlides ? true : false}
                 onClick={() => swiper?.slideNext() && console.log(swiper)}
             >

@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import { Swiper } from 'swiper/react';
 import { Container as Card, CardImage, DescriptionWrapper, Point, TextCardWrapper, TitleCard } from '../Card/Card.styled';
 import { Container as CopyButton } from '../CopyButton/CopyButton.styled';
+import AppearAnimation from '../AppearAnimation/AppearAnimation';
 
-export const Container = styled.div`
+export const Container = styled(AppearAnimation)`
     position: relative;
     width: 100%;
     ${mediaBreakpointUp('md')} {
@@ -17,39 +18,34 @@ export const Container = styled.div`
     }
 
     ${CopyButton} {
+        background: ${color('white', 0.15)};
         ${allBreakpointValue('inset', 40, 28, 28, 20, 12)};
         ${allBreakpointValue('width', 60, 40, 40, 36, 36)};
         ${allBreakpointValue('height', 60, 40, 40, 36, 36)};
 
-        button {
-            background: ${color('white', 0.15)};
-            ${allBreakpointValue('width', 60, 40, 40, 36, 36)};
-            ${allBreakpointValue('height', 60, 40, 40, 36, 36)};
+        svg {
+            padding-top: 3px;
+            width: 17px;
+            height: 17px;
+        }
+
+        ${mediaBreakpointUp('xl')} {
+            padding: 0;
 
             svg {
-                padding-top: 3px;
-                width: 17px;
-                height: 17px;
+                padding-top: 2px;
+                width: 19px;
+                height: 19px;
             }
+        }
 
-            ${mediaBreakpointUp('xl')} {
-                padding: 0;
+        ${mediaBreakpointUp('fhd')} {
+            padding: 0;
 
-                svg {
-                    padding-top: 2px;
-                    width: 19px;
-                    height: 19px;
-                }
-            }
-
-            ${mediaBreakpointUp('fhd')} {
-                padding: 0;
-
-                svg {
-                    padding-top: 2px;
-                    width: 28px;
-                    height: 28px;
-                }
+            svg {
+                padding-top: 2px;
+                width: 28px;
+                height: 28px;
             }
         }
     }

@@ -1,15 +1,15 @@
 import { allBreakpointValue, font, mediaBreakpointUp, sideOffsets } from '@/style/mixins';
 import styled from 'styled-components';
+import AppearAnimation from '../AppearAnimation/AppearAnimation';
 
 export const Container = styled.div`
     position: relative;
-
     ${sideOffsets()};
     ${allBreakpointValue('padding-top', 160, 130, 100, 60, 60)};
     ${allBreakpointValue('padding-bottom', 120, 110, 80, 60, 28)};
 `;
 
-export const Title = styled.div`
+export const Title = styled(AppearAnimation)`
     ${font('font36')};
     ${allBreakpointValue('margin-bottom', 28, 25, 20, 12, 20)};
     color: ${({ theme }) => theme.secondary.text};

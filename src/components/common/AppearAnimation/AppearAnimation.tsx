@@ -14,6 +14,7 @@ export interface AppearAnimationProps extends BaseUI {
         duration?: number;
         easing?: string | EaseFunction;
         delay?: number;
+        target?: TargetAnimation;
     };
     mode?: AppearAnimationModes;
     tag?: string;
@@ -21,6 +22,7 @@ export interface AppearAnimationProps extends BaseUI {
 
 // TODO: Как-то не очень понятно получилось, надо подправить
 export type AppearAnimationModes = 'auto' | 'play' | 'reverse';
+export type TargetAnimation = 'top' | 'bottom';
 type DefaultOptions = NonNullable<Required<AppearAnimationProps['options']>>;
 
 const defaultOption: DefaultOptions = {
@@ -29,9 +31,10 @@ const defaultOption: DefaultOptions = {
     animateThreshold: 0,
     intersection: true,
     initialVisibility: false,
-    duration: 0.55,
+    duration: 0.6,
     easing: 'ease',
-    delay: 0
+    delay: 0.1,
+    target: 'bottom'
 };
 
 /**
@@ -51,7 +54,7 @@ const AppearAnimation: React.FC<AppearAnimationProps> = (props) => {
     const children = typeof props.children === 'string' ? generateChildren() : props.children;
 
     useEffect(() => {
-        gsap.set(ref.current.children, { y: options.initialVisibility ? 0 : '100%' });
+        gsap.set(ref.current.children, { y: options.initialVisibility ? 0 : options.target === 'bottom' ? '100%' : '-100%' });
     }, []);
 
     useEffect(() => {

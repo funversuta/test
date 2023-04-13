@@ -52,7 +52,7 @@ export const ThemeWrapper = styled.div`
     }
 `;
 
-export const Checkbox = styled.input.attrs(({ type }) => ({
+export const Input = styled.input.attrs(({ type }) => ({
     type: type || 'checkbox'
 }))`
     display: none;
@@ -110,17 +110,17 @@ export const Switch = styled.label`
         height: 28px;
     }
 
-    ${Checkbox}:checked + ${SliderRound}:before {
+    ${Input}:checked + ${SliderRound}:before {
         background-color: ${color('white')};
         left: auto;
         right: 2px;
     }
 
-    ${Checkbox}:checked + ${SliderRound} {
+    ${Input}:checked + ${SliderRound} {
         background-color: ${color('blue')};
     }
 
-    ${Checkbox}:focus {
+    ${Input}:focus {
         box-shadow: 0 0 1px ${color('blue')};
     }
 `;

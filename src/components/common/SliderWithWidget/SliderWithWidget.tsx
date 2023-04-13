@@ -3,6 +3,7 @@ import { Container, MainContent, Title } from './SliderWithWidget.styled';
 import SimpleSlider from '../SimpleSlider/SimpleSlider';
 import Widgets from '../Widgets/Widgets';
 import { SliderProps, Theme } from '@/interfaces';
+import AppearAnimation from '../AppearAnimation/AppearAnimation';
 
 interface SliderWithWidgetProps {
     content: {
@@ -19,7 +20,9 @@ const SliderWithWidget: React.FC<SliderWithWidgetProps> = ({ content, toggleThem
             <Title>{content.title}</Title>
             <MainContent>
                 <SimpleSlider cards={content.slider} showNavigation={true} />
-                <Widgets theme={content.theme} toggleTheme={toggleTheme} />
+                <AppearAnimation options={{ target: 'top' }}>
+                    <Widgets theme={content.theme} toggleTheme={toggleTheme} />
+                </AppearAnimation>
             </MainContent>
         </Container>
     );
