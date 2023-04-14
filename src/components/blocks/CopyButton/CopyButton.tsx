@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MutableRefObject, useRef } from 'react';
 import { Container } from './CopyButton.styled';
 import { SvgElements } from '@/helpers/icons';
 import { Input } from '../ThemeControl/ThemeControl.styled';
@@ -8,8 +8,10 @@ interface CopyButtonProps {
 }
 
 const CopyButton: React.FC<CopyButtonProps> = ({ value = '' }) => {
+    const inputRef = useRef() as MutableRefObject<HTMLInputElement>;
+
     function myFunction() {
-        const copyText = document.getElementById('copyButton') as HTMLInputElement;
+        const copyText = inputRef.current;
 
         copyText.select();
 
@@ -17,8 +19,8 @@ const CopyButton: React.FC<CopyButtonProps> = ({ value = '' }) => {
     }
 
     return (
-        <Container onClick={myFunction} id="button">
-            <Input type="text" id="copyButton" />
+        <Container onClick={myFunction}>
+            <Input type="text" ref={inputRef} />
             {SvgElements['svgButton']}
         </Container>
     );

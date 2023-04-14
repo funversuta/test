@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, MutableRefObject, useRef } from 'react';
 import { Container, Input, SliderRound, Switch, ThemeWrapper, Title, ValueColor } from './ThemeControl.styled';
 
 interface ThemeControlProps {
@@ -12,10 +12,11 @@ interface ThemeControlProps {
 
 const ThemeControl: React.FC<ThemeControlProps> = ({ title, color, toggleTheme }) => {
     const [currentColor, setCurrentColor] = useState(color?.light);
+    const inputRef = useRef() as MutableRefObject<HTMLInputElement>;
 
     useEffect(() => {
         const item = localStorage.getItem('isDarkTheme');
-        const radioButton = document.getElementById('radioButton') as HTMLInputElement;
+        const radioButton = inputRef.current;
         if (item && item === 'true') {
             setCurrentColor(color?.dark);
             radioButton.checked = true;
@@ -24,7 +25,7 @@ const ThemeControl: React.FC<ThemeControlProps> = ({ title, color, toggleTheme }
     }, []);
 
     function myFunction() {
-        const radioButton = document.getElementById('radioButton') as HTMLInputElement;
+        const radioButton = inputRef.current;
 
         if (radioButton.value === color?.light) {
             setCurrentColor(color?.dark);
@@ -42,7 +43,7 @@ const ThemeControl: React.FC<ThemeControlProps> = ({ title, color, toggleTheme }
             <ThemeWrapper>
                 <ValueColor>{currentColor}</ValueColor>
                 <Switch>
-                    <Input id="radioButton" value={currentColor} onChange={myFunction} />
+                    <Input ref={inputRef} value={currentColor} onChange={myFunction} />
                     <SliderRound></SliderRound>
                 </Switch>
             </ThemeWrapper>

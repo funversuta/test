@@ -45,6 +45,7 @@ export const CardImage = styled(Image)`
         height: ${vw(300, 'fhd')};
     }
 `;
+
 export const TextCardWrapper = styled.div`
     ${allBreakpointValue('margin-top', 20, 12, 12, 8, 8)};
 `;
@@ -65,6 +66,7 @@ export const DescriptionWrapper = styled.div`
     color: ${({ theme }) => (theme.secondary.text === 'white' ? color('white', 0.6) : color('dark', 0.6))};
     ${font('font18')};
 `;
+
 export const Point = styled.div`
     width: 6px;
     height: 6px;
