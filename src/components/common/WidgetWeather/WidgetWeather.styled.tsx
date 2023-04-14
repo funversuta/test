@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Container as Element, PercentIcon, Numbers, Text } from '../Element/Element.styled';
 import SkeletonCheck from '../SkeletonCheck/SkeletonCheck';
 
-export const Container = styled.div`
+export const Container = styled(SkeletonCheck)`
     position: relative;
     background: ${color('lightGray')};
     border-radius: 16px;
@@ -13,7 +13,7 @@ export const Container = styled.div`
     ${allBreakpointValue('height', 439, 324, 304, 291, 172)};
 `;
 
-export const Head = styled(SkeletonCheck)`
+export const Head = styled.div`
     display: flex;
     align-items: center;
 
@@ -34,13 +34,13 @@ export const Head = styled(SkeletonCheck)`
     }
 `;
 
-export const ActualDate = styled(SkeletonCheck)`
+export const ActualDate = styled.div`
     ${allBreakpointValue('margin-top', 20, 11, 11.5, 12.5, 8.5)};
     ${font('font18_2')};
     color: ${color('dark')};
 `;
 
-export const Row = styled(SkeletonCheck)`
+export const Row = styled.div`
     display: flex;
     align-items: center;
 
@@ -82,7 +82,7 @@ export const Row = styled(SkeletonCheck)`
     }
 `;
 
-export const Row2 = styled(SkeletonCheck)`
+export const Row2 = styled.div`
     display: flex;
     flex-direction: column;
     margin-left: 20px;
@@ -162,7 +162,7 @@ export const Content = styled.div`
     }
 `;
 
-export const Footer = styled(SkeletonCheck)`
+export const Footer = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: auto;

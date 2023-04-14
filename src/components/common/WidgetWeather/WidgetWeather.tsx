@@ -32,7 +32,7 @@ const Widget: React.FC<WidgetProps> = () => {
                 console.error();
                 setError(true); // "Uh-oh!"
             });
-        }, 3000);
+        }, 3000000);
 
         return () => {
             clearTimeout(timer);
@@ -42,40 +42,34 @@ const Widget: React.FC<WidgetProps> = () => {
     поправил setWeather после присовоения даты */
 
     return (
-        <Container>
-            {error ? (
-                <p>Упс, что-то пошло не так</p>
-            ) : (
-                <>
-                    <Head isDataLoad={Weather != null}>
-                        <Element
-                            weatherIcon="vector"
-                            description={t(`Погода в`, { returnObjects: true }) + ' '}
-                            link={{ text: Weather?.geo_object?.locality?.name, href: Weather?.info?.url }}
-                            noNeedTemp
-                        />
-                    </Head>
-                    <ActualDate isDataLoad={Weather != null}>{date}</ActualDate>
-                    <Content>
-                        <Row isDataLoad={Weather != null}>
-                            <Element weatherIcon={'rainy'} temp={Weather?.fact?.temp} />
-                        </Row>
-                        <Row2 isDataLoad={Weather != null}>
-                            <RregularText>{t(`wheather.${Weather?.fact?.condition}`, { returnObjects: true })}</RregularText>
-                            <Element
-                                weatherIcon={'none'}
-                                text={t('wheather.feels_like', { returnObjects: true })}
-                                temp={Weather?.fact?.feels_like}
-                            />
-                        </Row2>
-                    </Content>
-                    <Footer isDataLoad={Weather != null}>
-                        <Element text={t(`Вечером`, { returnObjects: true })} temp={Weather?.forecasts[0]?.parts?.evening?.temp_avg} />
-                        <Element text={t(`Ночью`, { returnObjects: true })} temp={Weather?.forecasts[0]?.parts?.night?.temp_avg} />
-                        <Element text={t(`Утром`, { returnObjects: true })} temp={Weather?.forecasts[0]?.parts?.morning?.temp_avg} />
-                    </Footer>
-                </>
-            )}
+        <Container isDataLoad={Weather != null} error={error}>
+            <Head>
+                <Element
+                    weatherIcon="vector"
+                    description={t(`Погода в`, { returnObjects: true }) + ' '}
+                    link={{ text: Weather?.geo_object?.locality?.name, href: Weather?.info?.url }}
+                    noNeedTemp
+                />
+            </Head>
+            <ActualDate>{date}</ActualDate>
+            <Content>
+                <Row>
+                    <Element weatherIcon={'rainy'} temp={Weather?.fact?.temp} />
+                </Row>
+                <Row2>
+                    <RregularText>{t(`wheather.${Weather?.fact?.condition}`, { returnObjects: true })}</RregularText>
+                    <Element
+                        weatherIcon={'none'}
+                        text={t('wheather.feels_like', { returnObjects: true })}
+                        temp={Weather?.fact?.feels_like}
+                    />
+                </Row2>
+            </Content>
+            <Footer>
+                <Element text={t(`Вечером`, { returnObjects: true })} temp={Weather?.forecasts[0]?.parts?.evening?.temp_avg} />
+                <Element text={t(`Ночью`, { returnObjects: true })} temp={Weather?.forecasts[0]?.parts?.night?.temp_avg} />
+                <Element text={t(`Утром`, { returnObjects: true })} temp={Weather?.forecasts[0]?.parts?.morning?.temp_avg} />
+            </Footer>
         </Container>
     );
 };
