@@ -15,10 +15,7 @@ const SliderNavigation: React.FC<SliderNavigationProps> = ({ swiper, position })
             <Button Reverse isOver={position === 'beginning' && !swiper?.loopedSlides ? true : false} onClick={() => swiper?.slidePrev()}>
                 <Arrow />
             </Button>
-            <Button
-                isOver={position === 'end' && !swiper?.loopedSlides ? true : false}
-                onClick={() => swiper?.slideNext() && console.log(swiper)}
-            >
+            <Button isOver={position === 'end' && !swiper?.loopedSlides ? true : false} onClick={() => swiper?.slideNext()}>
                 <Arrow />
             </Button>
         </Container>

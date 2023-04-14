@@ -19,7 +19,6 @@ const Widget: React.FC<WidgetProps> = () => {
         const fetchData = async () => {
             const data = await getWeatherFetch({ lat: 43.5992, lon: 39.7257, lang: 'ru_RU' });
             if (data) {
-                console.log(Weather);
                 if (data.data?.now_dt) {
                     const event = new Date(data.data?.now_dt);
                     setDate(dataFormat(event));
