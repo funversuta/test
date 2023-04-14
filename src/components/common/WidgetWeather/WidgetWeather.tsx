@@ -27,16 +27,10 @@ const Widget: React.FC<WidgetProps> = () => {
                 setWeather(data.data);
             }
         };
-        const timer = setTimeout(() => {
-            fetchData().catch(() => {
-                console.error();
-                setError(true); // "Uh-oh!"
-            });
-        }, 3000000);
-
-        return () => {
-            clearTimeout(timer);
-        };
+        fetchData().catch(() => {
+            console.error();
+            setError(true); // "Uh-oh!"
+        });
     }, []); /* При Weather'e постоянно идут запросы из юзэффекта, 
     при weather == null шёл второй запрос для обновления даты после получения данных, 
     поправил setWeather после присовоения даты */

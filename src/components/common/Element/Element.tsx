@@ -24,7 +24,6 @@ const Element: React.FC<ElementProps> = ({ text, temp, weatherIcon, link, descri
 
             {description && (
                 <Description>
-                    {' '}
                     {description}
                     {link && (
                         <Link href={link.href ?? ''} passHref>
