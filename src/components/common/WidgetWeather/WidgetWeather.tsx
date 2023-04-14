@@ -28,12 +28,12 @@ const Widget: React.FC<WidgetProps> = () => {
             }
         };
         fetchData().catch(() => {
-            console.error();
+            console.error(); //и про запятую
             setError(true); // "Uh-oh!"
         });
     }, []); /* При Weather'e постоянно идут запросы из юзэффекта, 
     при weather == null шёл второй запрос для обновления даты после получения данных, 
-    поправил setWeather после присовоения даты */
+    поправил setWeather после присовоения даты(Объясню) */
 
     return (
         <Container isDataLoad={Weather != null} error={error}>
